@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'CustomFont';
+  src: url('./assets/trebuc.woff') format('truetype'); /* Adjust the path to your font file */
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'CustomFont', sans-serif;
+}

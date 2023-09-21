@@ -1,0 +1,11 @@
+.wrapper {
+  max-width: 768px;
+  margin: auto;
+  background-color: bisque;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.content {
+    flex-grow: 1; /* Allow content to expand and push the footer to the bottom */
+  }
