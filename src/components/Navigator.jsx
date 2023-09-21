@@ -10,6 +10,8 @@ import youInactive from "../assets/youInactive.svg";
 import guidanceActive from "../assets/guidanceActive.svg";
 import guidanceInactive from "../assets/guidanceInactive.svg";
 
+
+
 const Navigator = () => {
   // Routes
   const routes = [
