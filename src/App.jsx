@@ -1,6 +1,6 @@
 import "../src/styles/App.scss";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Compatibility from "./pages/Compatibility";
+import Compatibility from "./pages/compatibility/Compatibility";
 import Horoscope from "./pages/Horoscope";
 import Navigator from "./components/Navigator";
 import You from "./pages/You";

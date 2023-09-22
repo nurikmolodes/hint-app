@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/components/Navigator.scss";
+import "../styles/Navigator.scss";
 import { Link, useLocation } from "react-router-dom";
 import horoscopeActive from "../assets/horoscopeActive.svg";
 import horoscopeInactive from "../assets/horoscopeInactive.svg";

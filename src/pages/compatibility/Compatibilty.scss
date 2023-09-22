@@ -1,0 +1,76 @@
+.compatibility {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  /* Component-level CSS */
+  .questions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 15px;
+    gap: 20px;
+    p {
+      color: var(--Body, #646670);
+      /* body 14 */
+      font-family: Trebuchet MS;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%; /* 21px */
+    }
+    h3 {
+      color: var(--Heading, #25282f);
+      /* body 14 bold */
+      font-family: Trebuchet MS;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%; /* 21px */
+    }
+
+    .progress-dots {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin: 0 5px;
+      background-color: #ccc; /* Default dot color */
+    }
+
+    .dot.active {
+      background: var(--Grad, linear-gradient(139deg, #404065 10.29%, #0085ff 94.53%));
+    }
+    img {
+      width: 313px;
+      height: 291.9px;
+      margin: auto;
+      margin-bottom: 50px;
+      @media(max-width: 375px) {
+        width: 280px;
+        height: 270px;
+        margin-bottom: 20px;
+      }
+    }
+    button {
+      height: 24px;
+      border-radius: 16px;
+      background: var(--Grad, linear-gradient(139deg, #404065 10.29%, #0085ff 94.53%));
+      display: flex;
+      height: 50px;
+      justify-content: center;
+      align-items: center;
+      color: var(--White, #fff);
+      text-align: center;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      border: none;
+    }
+  }
+}
