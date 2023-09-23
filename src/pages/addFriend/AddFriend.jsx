@@ -3,6 +3,7 @@ import "./AddFriend.scss";
 import { Link, useLocation } from "react-router-dom";
 import user from "../../assets/male.svg";
 import back from "../../assets/back.svg";
+import Loading from "../../components/Loading";
 
 const AddFriend = ({ getTheUrl }) => {
   const dateInputRef = useRef(null);
@@ -20,6 +21,7 @@ const AddFriend = ({ getTheUrl }) => {
     placeOfBirth: "",
     agreeToTerms: false,
   });
+  const [loadingSubmit, setLoadingSubmit] = useState(false);
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
@@ -48,9 +50,13 @@ const AddFriend = ({ getTheUrl }) => {
   };
 
   const handleSubmit = (event) => {
+    setLoadingSubmit(true);
     event.preventDefault();
     console.log(formData);
     // Handle form submission here, e.g., send data to a server
+    setTimeout(() => {
+      setLoadingSubmit(false);
+    }, 5000);
   };
   //path
   const location = useLocation();
@@ -61,7 +67,8 @@ const AddFriend = ({ getTheUrl }) => {
     };
   }, [location?.pathname]);
   return (
-    <div className="addFriend">
+    <div className={'addFriend'}>
+      {/* <Loading /> */}
       <header>
         <div className="back">
           <Link to={"/"}>

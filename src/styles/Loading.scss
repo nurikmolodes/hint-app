@@ -1,0 +1,10 @@
+.loading {
+    width: 100%;
+    height: 1000px;
+    .image {
+        width: 100%;
+        height: 100%;
+        background-size: cover !important;
+        background: url('../assets/loading.png');
+    }
+}
