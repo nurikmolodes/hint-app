@@ -33,7 +33,7 @@ const Questions = () => {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       // Redirect to another page when all questions are answered
-      navigate("/another-page"); // Change '/another-page' to the desired URL
+      navigate("/addfriend"); // Change '/another-page' to the desired URL
     }
   };
 

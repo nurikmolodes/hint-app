@@ -1,0 +1,82 @@
+.addFriend {
+  /* Toggle Switch Container */
+  .toggle-switch-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  /* Toggle Switch Label */
+  .toggle-switch-label {
+    font-size: 16px;
+    margin-right: 10px;
+  }
+
+  /* Toggle Switch */
+  .toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 30px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  /* Toggle Switch Slider */
+  .toggle-switch-slider {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 26px;
+    height: 26px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+  }
+
+  /* Toggle Switch Text */
+  .toggle-switch-text {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #fff;
+  }
+
+  /* Active State */
+  .toggle-switch.active {
+    background-color: #4caf50;
+  }
+
+  .toggle-switch.active .toggle-switch-slider {
+    transform: translateX(30px);
+  }
+  .gender-button {
+    display: flex;
+    justify-content: space-between;
+    width: 120px;
+  }
+
+  .gender-option {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  /* Active State for Gender Buttons */
+  .gender-option.active {
+    background-color: #4caf50; /* Change the background color */
+    color: #fff; /* Change the text color */
+  }
+}

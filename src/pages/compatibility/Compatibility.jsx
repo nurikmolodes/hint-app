@@ -1,13 +1,15 @@
-import React from 'react'
-import QuestionsCompatibility from '../../components/compatibility/QuestionsCompatibility'
-import './Compatibilty.scss'
+import React from "react";
+import QuestionsCompatibility from "../../components/compatibility/QuestionsCompatibility";
+import "./Compatibilty.scss";
 
 const Compatibility = () => {
   return (
-    <div className='compatibility'>
-      <QuestionsCompatibility />
+    <div className="compatibility">
+      <div className="content">
+        <QuestionsCompatibility />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Compatibility
+export default Compatibility;
