@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import user from "../../assets/male.svg";
 import back from "../../assets/back.svg";
 import Loading from "../../components/Loading";
+import axios from "axios";
 
 const AddFriend = ({ getTheUrl }) => {
   const dateInputRef = useRef(null);
@@ -66,8 +67,42 @@ const AddFriend = ({ getTheUrl }) => {
       getTheUrl("");
     };
   }, [location?.pathname]);
+
+  // places
+  const [cities, setCities] = useState([]);
+  const fetchPlaces = async (K) => {
+    const url = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address";
+    const token = "d8dfbebbee14478cd5328086951a7d38b3aaec9d";
+
+    const options = {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: "Token " + token,
+      },
+    };
+
+    try {
+      const place = await axios.post(
+        url,
+        {
+          query: K,
+          locations: [{ country: "*" }],
+          language: "en",
+        },
+        options,
+      );
+      setCities(place.data.suggestions);
+      console.log(cities);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
-    <div className={'addFriend'}>
+    <div className={"addFriend"}>
       {/* <Loading /> */}
       <header>
         <div className="back">
@@ -151,10 +186,11 @@ const AddFriend = ({ getTheUrl }) => {
             type="text"
             placeholder="Location, State, Country"
             name="placeOfBirth"
-            value={formData.placeOfBirth}
-            onChange={handleChange}
+            // value={formData.placeOfBirth}
+            onChange={(e) => fetchPlaces(e.target.value)}
             required
           />
+          <span>{cities && cities?.map(a => a.value,)}</span>
           <p>Don’t know the city? Just add country.</p>
         </div>
         <div className="submit">
