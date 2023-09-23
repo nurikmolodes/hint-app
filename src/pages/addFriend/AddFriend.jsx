@@ -1,8 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./AddFriend.scss";
 import { Link, useLocation } from "react-router-dom";
+import user from "../../assets/male.svg";
+import back from "../../assets/back.svg";
 
 const AddFriend = ({ getTheUrl }) => {
+  const dateInputRef = useRef(null);
+  console.log(dateInputRef);
+
+  const handleButtonClick = () => {
+    dateInputRef.current.click();
+  };
+
   const [formData, setFormData] = useState({
     name: "",
     gender: "male", // Default gender selection
@@ -53,14 +62,30 @@ const AddFriend = ({ getTheUrl }) => {
   }, [location?.pathname]);
   return (
     <div className="addFriend">
-      <h1>React Form</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
-          <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+      <header>
+        <div className="back">
+          <Link to={"/"}>
+            <img src={back} />
+          </Link>
         </div>
-        <div className="gender-toggle">
-          <label>Gender:</label>
+        <div className="user">
+          <img src={user} />
+        </div>
+      </header>
+      <form onSubmit={handleSubmit}>
+        <div className="name">
+          <label>Name*</label>
+          <input
+            placeholder="Your friend's name"
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="gender">
+          <label>Gender</label>
           <div className="gender-button">
             <button
               type="button"
@@ -76,28 +101,23 @@ const AddFriend = ({ getTheUrl }) => {
             </button>
           </div>
         </div>
-        <div>
-          <label>Place of Birth:</label>
-          <input
-            type="text"
-            name="placeOfBirth"
-            value={formData.placeOfBirth}
-            onChange={handleChange}
-            required
-          />
+        <div className="date">
+          <label htmlFor="date">Date of Birth*</label>
+          <div className="date-input-container">
+            <input
+              placeholder="YYYY-MM-DD"
+              type="date"
+              id="date"
+              name="dateOfBirth"
+              value={formData.dateOfBirth}
+              onChange={handleChange}
+              ref={dateInputRef}
+              required
+            />
+          </div>
         </div>
-        <div>
-          <label>Date of Birth:</label>
-          <input
-            type="date"
-            name="dateOfBirth"
-            value={formData.dateOfBirth}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Time of Birth:</label>
+        <div className="birth">
+          <label onClick={handleButtonClick}>Time of Birth*</label>
           <input
             type="time"
             name="timeOfBirth"
@@ -105,17 +125,32 @@ const AddFriend = ({ getTheUrl }) => {
             onChange={handleChange}
             required
           />
+          <p>
+            Don’t worry if you don’t know the exact birth time, you can still find plenty of
+            insights using the default setting.
+          </p>
         </div>
         <div className="toggle-switch-container">
-          <label className="toggle-switch-label">Unknown Time of Birth:</label>
+          <label className="toggle-switch-label">“I don’t know. Set to default (12:00 PM)”</label>
           <div
             className={`toggle-switch ${formData.unknownTimeOfBirth ? "active" : ""}`}
             onClick={handleUnknownTimeOfBirthChange}>
             <div className="toggle-switch-slider"></div>
-            <span className="toggle-switch-text">{formData.unknownTimeOfBirth ? "Yes" : "No"}</span>
           </div>
         </div>
-        <div>
+        <div className="place">
+          <label>Place of Birth*</label>
+          <input
+            type="text"
+            placeholder="Location, State, Country"
+            name="placeOfBirth"
+            value={formData.placeOfBirth}
+            onChange={handleChange}
+            required
+          />
+          <p>Don’t know the city? Just add country.</p>
+        </div>
+        <div className="submit">
           <button type="submit">Submit</button>
         </div>
       </form>

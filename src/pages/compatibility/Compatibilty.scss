@@ -50,15 +50,21 @@
       .dot.active {
         background: var(--Grad, linear-gradient(139deg, #404065 10.29%, #0085ff 94.53%));
       }
-      img {
-        width: 313px;
-        height: 291.9px;
-        margin: auto;
-        margin-bottom: 50px;
-        @media (max-width: 375px) {
-          width: 280px;
-          height: 270px;
-          margin-bottom: 20px;
+      .image {
+        background-image: url(../../assets/backgroundUser.png);
+        background-repeat: round;
+        display: flex;
+        justify-content: center;
+        img {
+          width: 313px;
+          height: 291.9px;
+          margin: auto;
+          margin-bottom: 50px;
+          @media (max-width: 375px) {
+            width: 280px;
+            height: 270px;
+            margin-bottom: 20px;
+          }
         }
       }
       button {

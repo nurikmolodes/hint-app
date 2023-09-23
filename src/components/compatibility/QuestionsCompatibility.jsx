@@ -39,7 +39,9 @@ const Questions = () => {
 
   return (
     <div className="questions">
-      <img src={questions[currentQuestionIndex].img} />
+      <div className="image">
+        <img src={questions[currentQuestionIndex].img} />
+      </div>
       <h3>{questions[currentQuestionIndex].title}</h3>
       <p>{questions[currentQuestionIndex].content}</p>
       <div className="progress-dots">
