@@ -16,8 +16,8 @@ const AddFriend = ({ getTheUrl }) => {
   const [formData, setFormData] = useState({
     name: "",
     gender: "male", // Default gender selection
-    dateOfBirth: "",
-    timeOfBirth: "",
+    dateOfBirth: "1991-01-01",
+    timeOfBirth: "00:00",
     placeOfBirth: "",
     agreeToTerms: false,
   });
@@ -41,7 +41,7 @@ const AddFriend = ({ getTheUrl }) => {
   };
   const handleUnknownTimeOfBirthChange = () => {
     const newUnknownTimeOfBirth = !formData.unknownTimeOfBirth;
-    const newTimeOfBirth = newUnknownTimeOfBirth ? "12:00" : ""; // Set to default if unknown
+    const newTimeOfBirth = newUnknownTimeOfBirth ? "12:00" : "00:00"; // Set to default if unknown
     setFormData({
       ...formData,
       unknownTimeOfBirth: newUnknownTimeOfBirth,
