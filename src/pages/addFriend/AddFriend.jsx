@@ -5,11 +5,12 @@ import user from "../../assets/male.svg";
 import back from "../../assets/back.svg";
 import Loading from "../../components/Loading";
 import axios from "axios";
+import notFound from "../../assets/notFound.svg";
 
 const AddFriend = ({ getTheUrl }) => {
-  // LOADING 
+  // LOADING
   const [loadingSubmit, setLoadingSubmit] = useState(false);
-  // FORM 
+  // FORM
   const [formData, setFormData] = useState({
     name: "",
     gender: "male", // Default gender selection
@@ -59,7 +60,7 @@ const AddFriend = ({ getTheUrl }) => {
       gender: selectedGender,
     });
   };
-  // SUBMIT FORM 
+  // SUBMIT FORM
   const handleSubmit = (event) => {
     setLoadingSubmit(true);
     event.preventDefault();
@@ -212,14 +213,22 @@ const AddFriend = ({ getTheUrl }) => {
             required
           />
           {showCities && (
-            <div className="cities">
-              {cities &&
-                cities?.map((a) => (
-                  <span onClick={() => selectCity(a.value)} key={a.value}>
-                    {a.value}
-                  </span>
-                ))}
-            </div>
+            <>
+              <div className="cities">
+                {cities &&
+                  cities?.map((a) => (
+                    <span onClick={() => selectCity(a.value)} key={a.value}>
+                      {a.value}
+                    </span>
+                  ))}
+              </div>
+              {cities.length === 0 && (
+                <div className="notFound">
+                  <img src={notFound} />
+                  <p>no results found</p>
+                </div>
+              )}
+            </>
           )}
           <p>Don’t know the city? Just add country.</p>
         </div>
