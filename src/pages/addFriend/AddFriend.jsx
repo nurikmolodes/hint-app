@@ -7,39 +7,18 @@ import Loading from "../../components/Loading";
 import axios from "axios";
 
 const AddFriend = ({ getTheUrl }) => {
-  const dateInputRef = useRef(null);
-  console.log(dateInputRef);
-
-  const handleButtonClick = () => {
-    dateInputRef.current.click();
-  };
-
+  // LOADING 
+  const [loadingSubmit, setLoadingSubmit] = useState(false);
+  // FORM 
   const [formData, setFormData] = useState({
     name: "",
     gender: "male", // Default gender selection
     dateOfBirth: "1991-01-01",
     timeOfBirth: "00:00",
     placeOfBirth: "",
-    agreeToTerms: false,
+    unknownTimeOfBirth: false,
   });
-  const [loadingSubmit, setLoadingSubmit] = useState(false);
-
-  const handleChange = (event) => {
-    const { name, value, type, checked } = event.target;
-    const newValue = type === "checkbox" ? checked : value;
-
-    setFormData({
-      ...formData,
-      [name]: newValue,
-    });
-  };
-
-  const handleGenderChange = (selectedGender) => {
-    setFormData({
-      ...formData,
-      gender: selectedGender,
-    });
-  };
+  // DATE
   const handleUnknownTimeOfBirthChange = () => {
     const newUnknownTimeOfBirth = !formData.unknownTimeOfBirth;
     const newTimeOfBirth = newUnknownTimeOfBirth ? "12:00" : "00:00"; // Set to default if unknown
@@ -49,7 +28,38 @@ const AddFriend = ({ getTheUrl }) => {
       timeOfBirth: newTimeOfBirth,
     });
   };
+  const dateInputRef = useRef(null);
+  console.log(dateInputRef);
 
+  const handleButtonClick = () => {
+    dateInputRef.current.click();
+  };
+  const handleChange = (event) => {
+    const { name, value, type, checked } = event.target;
+    const newValue = type === "checkbox" ? checked : value;
+
+    setFormData({
+      ...formData,
+      [name]: newValue,
+    });
+  };
+  // CITIES
+  const [showContent, setShowContent] = useState(true);
+  const [showCities, setShowCities] = useState(false);
+  const selectCity = (city) => {
+    console.log(city);
+    setFormData({ ...formData, placeOfBirth: city });
+    setShowCities(false);
+    setShowContent(true);
+  };
+  // GENDER
+  const handleGenderChange = (selectedGender) => {
+    setFormData({
+      ...formData,
+      gender: selectedGender,
+    });
+  };
+  // SUBMIT FORM 
   const handleSubmit = (event) => {
     setLoadingSubmit(true);
     event.preventDefault();
@@ -59,7 +69,7 @@ const AddFriend = ({ getTheUrl }) => {
       setLoadingSubmit(false);
     }, 5000);
   };
-  //path
+  //PATH
   const location = useLocation();
   useEffect(() => {
     getTheUrl(location?.pathname);
@@ -68,9 +78,12 @@ const AddFriend = ({ getTheUrl }) => {
     };
   }, [location?.pathname]);
 
-  // places
+  // PLACES
   const [cities, setCities] = useState([]);
   const fetchPlaces = async (K) => {
+    setShowCities(true);
+    setFormData({ ...formData, placeOfBirth: K });
+    setShowContent(K === "");
     const url = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address";
     const token = "d8dfbebbee14478cd5328086951a7d38b3aaec9d";
 
@@ -104,98 +117,117 @@ const AddFriend = ({ getTheUrl }) => {
   return (
     <div className={"addFriend"}>
       {/* <Loading /> */}
-      <header>
-        <div className="back">
-          <Link to={"/"}>
-            <img src={back} />
-          </Link>
-        </div>
-        <div className="user">
-          <img src={user} />
-        </div>
-      </header>
+      {showContent && (
+        <header>
+          <div className="back">
+            <Link to={"/"}>
+              <img src={back} />
+            </Link>
+          </div>
+          <div className="user">
+            <img src={user} />
+          </div>
+        </header>
+      )}
       <form onSubmit={handleSubmit}>
-        <div className="name">
-          <label>Name*</label>
-          <input
-            placeholder="Your friend's name"
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="gender">
-          <label>Gender</label>
-          <div className="gender-button">
-            <button
-              type="button"
-              className={`gender-option ${formData.gender === "male" ? "active" : ""}`}
-              onClick={() => handleGenderChange("male")}>
-              Male
-            </button>
-            <button
-              type="button"
-              className={`gender-option ${formData.gender === "female" ? "active" : ""}`}
-              onClick={() => handleGenderChange("female")}>
-              Female
-            </button>
-          </div>
-        </div>
-        <div className="date">
-          <label htmlFor="date">Date of Birth*</label>
-          <div className="date-input-container">
-            <input
-              placeholder="YYYY-MM-DD"
-              type="date"
-              id="date"
-              name="dateOfBirth"
-              value={formData.dateOfBirth}
-              onChange={handleChange}
-              ref={dateInputRef}
-              required
-            />
-          </div>
-        </div>
-        <div className="birth">
-          <label onClick={handleButtonClick}>Time of Birth*</label>
-          <input
-            type="time"
-            name="timeOfBirth"
-            value={formData.timeOfBirth}
-            onChange={handleChange}
-            required
-          />
-          <p>
-            Don’t worry if you don’t know the exact birth time, you can still find plenty of
-            insights using the default setting.
-          </p>
-        </div>
-        <div className="toggle-switch-container">
-          <label className="toggle-switch-label">“I don’t know. Set to default (12:00 PM)”</label>
-          <div
-            className={`toggle-switch ${formData.unknownTimeOfBirth ? "active" : ""}`}
-            onClick={handleUnknownTimeOfBirthChange}>
-            <div className="toggle-switch-slider"></div>
-          </div>
-        </div>
+        {showContent && (
+          <>
+            <div className="name">
+              <label>Name*</label>
+              <input
+                placeholder="Your friend's name"
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="gender">
+              <label>Gender</label>
+              <div className="gender-button">
+                <button
+                  type="button"
+                  className={`gender-option ${formData.gender === "male" ? "active" : ""}`}
+                  onClick={() => handleGenderChange("male")}>
+                  Male
+                </button>
+                <button
+                  type="button"
+                  className={`gender-option ${formData.gender === "female" ? "active" : ""}`}
+                  onClick={() => handleGenderChange("female")}>
+                  Female
+                </button>
+              </div>
+            </div>
+            <div className="date">
+              <label htmlFor="date">Date of Birth*</label>
+              <div className="date-input-container">
+                <input
+                  placeholder="YYYY-MM-DD"
+                  type="date"
+                  id="date"
+                  name="dateOfBirth"
+                  value={formData.dateOfBirth}
+                  onChange={handleChange}
+                  ref={dateInputRef}
+                  required
+                />
+              </div>
+            </div>
+            <div className="birth">
+              <label onClick={handleButtonClick}>Time of Birth*</label>
+              <input
+                type="time"
+                name="timeOfBirth"
+                value={formData.timeOfBirth}
+                onChange={handleChange}
+                required
+              />
+              <p>
+                Don’t worry if you don’t know the exact birth time, you can still find plenty of
+                insights using the default setting.
+              </p>
+            </div>
+            <div className="toggle-switch-container">
+              <label className="toggle-switch-label">
+                “I don’t know. Set to default (12:00 PM)”
+              </label>
+              <div
+                className={`toggle-switch ${formData.unknownTimeOfBirth ? "active" : ""}`}
+                onClick={handleUnknownTimeOfBirthChange}>
+                <div className="toggle-switch-slider"></div>
+              </div>
+            </div>
+          </>
+        )}
         <div className="place">
           <label>Place of Birth*</label>
           <input
             type="text"
             placeholder="Location, State, Country"
             name="placeOfBirth"
-            // value={formData.placeOfBirth}
+            value={formData.placeOfBirth}
             onChange={(e) => fetchPlaces(e.target.value)}
             required
           />
-          <span>{cities && cities?.map(a => a.value,)}</span>
+          {showCities && (
+            <div className="cities">
+              {cities &&
+                cities?.map((a) => (
+                  <span onClick={() => selectCity(a.value)} key={a.value}>
+                    {a.value}
+                  </span>
+                ))}
+            </div>
+          )}
           <p>Don’t know the city? Just add country.</p>
         </div>
-        <div className="submit">
-          <button type="submit">Submit</button>
-        </div>
+        {showContent && (
+          <div className="submit">
+            <button type="submit">Submit</button>
+          </div>
+        )}
       </form>
     </div>
   );
