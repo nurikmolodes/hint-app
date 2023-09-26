@@ -1,8 +1,9 @@
 import React from 'react'
+import './Guidance.scss'
 
 const Guidance = () => {
   return (
-    <div>Guidance</div>
+    <div className='guidance'>Guidance</div>
   )
 }
 

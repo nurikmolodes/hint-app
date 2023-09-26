@@ -1,10 +1,10 @@
 import "../src/styles/App.scss";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Compatibility from "./pages/compatibility/Compatibility";
-import Horoscope from "./pages/Horoscope";
+import Horoscope from "./pages/horoscope/Horoscope";
 import Navigator from "./components/Navigator";
-import You from "./pages/You";
-import Guidance from "./pages/Guidance";
+import You from "./pages/you/You";
+import Guidance from "./pages/guidance/Guidance";
 import AddFriend from "./pages/compatibility/addFriend/AddFriend";
 import ResultsCompatibilty from "./pages/compatibility/resultsCompatibilty/ResultsCompatibility";
 import { useState } from "react";
@@ -12,7 +12,7 @@ import DetailCharacteristic from "./pages/compatibility/detailCharacteristisc/De
 
 function App() {
   const location = useLocation();
-  const footerRoutes = ["/", "/compatibility", "/horoscope", "/you", "guidance"];
+  const footerRoutes = ["/", "/compatibility", "/horoscope", "/you", "/guidance"];
   // Check if the current pathname is in the navbarRoutes array
   const shouldDisplayNavbar = footerRoutes.includes(location.pathname);
 

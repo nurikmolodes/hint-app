@@ -1,8 +1,9 @@
 import React from 'react'
+import './Horoscope.scss'
 
 const Horoscope = () => {
   return (
-    <div>Horoscope</div>
+    <div className='horoscope'>Horoscope</div>
   )
 }
 
