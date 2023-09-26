@@ -1,0 +1,42 @@
+.resultsCompatibility {
+  margin: 15px;
+  .back {
+    background: url(../../../assets/backgroundUser.png);
+  }
+  header {
+    background-image: url(../../../assets/backgroundUser.png);
+    background-repeat: round;
+  }
+  .option-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 100%;
+      height: 42px;
+      border: none;
+      box-shadow: 0px 4px 12px 0px rgba(90, 90, 90, 0.17);
+      border-radius: 16px;
+      color: var(--Body, #646670);
+      text-align: center;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%; /* 21px */
+      background: #bfd2ff;
+    }
+    .active {
+      background: var(--Blue, #5480f0);
+      color: var(--White, #fff);
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%; /* 21px */
+    }
+  }
+}

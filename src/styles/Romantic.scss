@@ -1,0 +1,46 @@
+.romantic {
+  position: relative;
+  margin-top: 50px;
+  .match {
+    .users {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 5%;
+      .user {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 7px;
+      }
+      .progress-bar-container {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+      }
+
+      .progress-bar {
+        width: 100px;
+        height: 100px;
+        background-color: #f5f5f5;
+        border: 1px dashed #ccc;
+        position: relative;
+        border-radius: 50%;
+
+      }
+
+      .progress-bar-fill {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: red;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+      }
+    }
+  }
+}
