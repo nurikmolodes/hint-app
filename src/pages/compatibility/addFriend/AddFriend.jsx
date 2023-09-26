@@ -119,7 +119,7 @@ const AddFriend = () => {
             {showContent && (
               <header>
                 <div className="back">
-                  <Link to={"/"}>
+                  <Link onClick={() => navigate(-1)}>
                     <img src={back} />
                   </Link>
                 </div>

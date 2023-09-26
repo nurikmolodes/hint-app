@@ -1,15 +1,16 @@
 import React from "react";
 import "./DetailCharacteristic.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import back from "../../../assets/back.svg";
 import share from "../../../assets/share.svg";
 
 const DetailCharacteristic = () => {
+  const navigate = useNavigate();
   return (
     <div className="detail-characteristic">
       <header>
         <div className="back">
-          <Link to={"/"}>
+          <Link onClick={() => navigate(-1)}>
             <img src={back} />
           </Link>
         </div>

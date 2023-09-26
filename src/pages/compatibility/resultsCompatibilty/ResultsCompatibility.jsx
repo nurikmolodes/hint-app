@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ResultsCompatibility.scss";
 import back from "../../../assets/back.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ActiveRomantic from "../../../assets/ActiveRomantic.svg";
 import ActiveFriendship from "../../../assets/ActiveFriendship.svg";
 import InActiveRomantic from "../../../assets/inActiveRomantic.svg";
@@ -10,6 +10,7 @@ import Romantic from "../../../components/compatibility/Romantic";
 import Friendship from "../../../components/compatibility/Friendship";
 
 const ResultsCompatibility = () => {
+  const navigate = useNavigate();
   const [options, setOptions] = useState([
     {
       id: 1,
@@ -40,7 +41,7 @@ const ResultsCompatibility = () => {
     <div className="resultsCompatibility">
       <header>
         <div className="back">
-          <Link to={"/"}>
+          <Link onClick={() => navigate(-1)}>
             <img src={back} />
           </Link>
         </div>
