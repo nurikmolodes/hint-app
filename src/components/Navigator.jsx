@@ -63,7 +63,7 @@ const Navigator = () => {
             <li>
               {" "}
               {route.active ? <img src={route.activeImage} /> : <img src={route.inActiveImage} />}
-              <a>{route.name}</a>
+              <span>{route.name}</span>
             </li>
           </Link>
         ))}

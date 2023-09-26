@@ -8,6 +8,7 @@ import Guidance from "./pages/Guidance";
 import AddFriend from "./pages/compatibility/addFriend/AddFriend";
 import ResultsCompatibilty from "./pages/compatibility/resultsCompatibilty/ResultsCompatibility";
 import { useState } from "react";
+import DetailCharacteristic from "./pages/compatibility/detailCharacteristisc/DetailCharacteristic";
 
 function App() {
   const location = useLocation();
@@ -38,13 +39,18 @@ function App() {
     },
     {
       path: "/addfriend",
-      component: <AddFriend  />,
+      component: <AddFriend />,
       label: "Add Friend",
     },
     {
       path: "/resultsCompatibility",
       component: <ResultsCompatibilty />,
       label: "Results Compatibilty",
+    },
+    {
+      path: "/:CharacteristicId",
+      component: <DetailCharacteristic />,
+      label: "Characteristic",
     },
   ];
   return (

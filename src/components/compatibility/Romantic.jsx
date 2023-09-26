@@ -6,10 +6,12 @@ import threeHearts from "../../assets/threeHearts.svg";
 import share from "../../assets/shareScore.svg";
 import basic from "../../assets/basic.svg";
 import emotion from "../../assets/emotion.svg";
+import { useNavigate } from "react-router-dom";
 
 const Romantic = () => {
   const characteristics = [
     {
+      id: 1,
       title: "Basic Identities",
       content:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.",
@@ -17,6 +19,7 @@ const Romantic = () => {
       titleColor: "#E48D21",
     },
     {
+      id: 2,
       title: "Emotional Styles",
       content:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.",
@@ -24,6 +27,11 @@ const Romantic = () => {
       titleColor: "#5480F0",
     },
   ];
+  const navigate = useNavigate();
+
+  const navigateToAnotherPage = (id) => {
+    navigate(`/${id}`);
+  };
   return (
     <div className="romantic">
       <div className="match">
@@ -46,10 +54,10 @@ const Romantic = () => {
       </div>
       <div className="characteristics">
         {characteristics.map((item, i) => (
-          <div className="characteristic" style={{ background: `url(${item.img})` }}>
+          <div key={item.id} className="characteristic" style={{ background: `url(${item.img})` }}>
             <h3 style={{ color: `${item.titleColor}` }}>{item.title}</h3>
             <p>{item.content}</p>
-            <span>Read More</span>
+            <span onClick={() => navigateToAnotherPage(item.id)}>Read More</span>
           </div>
         ))}
       </div>

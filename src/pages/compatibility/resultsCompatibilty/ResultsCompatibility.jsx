@@ -12,12 +12,14 @@ import Friendship from "../../../components/compatibility/Friendship";
 const ResultsCompatibility = () => {
   const [options, setOptions] = useState([
     {
+      id: 1,
       text: "Romantic",
       active: true,
       activeImg: ActiveRomantic,
       inActiveImg: InActiveRomantic,
     },
     {
+      id: 2,
       text: "Friendship",
       active: false,
       activeImg: ActiveFriendship,
