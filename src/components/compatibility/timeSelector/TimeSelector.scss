@@ -1,0 +1,35 @@
+.date-picker-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 200px;
+}
+
+.date-picker-option {
+  width: 40px;
+  height: 60px;
+  overflow-y: hidden;
+  border: 1px solid #ccc;
+  text-align: center;
+  font-size: 20px;
+  line-height: 60px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.date-picker-option.scrolling {
+  transition: none;
+}
+
+.selected-date {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+}
+.picker-container .picker-column {
+  transform: rotate(180deg);
+}
+.picker-container .picker-column .picker-item {
+    transform: rotate(180deg);
+  }
+  
