@@ -35,10 +35,14 @@
     justify-content: center;
   }
   .picker-container .picker-column {
-    transform: rotate(180deg);
+    @media (min-width: 768px) {
+      transform: rotate(180deg);
+    }
   }
   .picker-container .picker-column .picker-item {
-    transform: rotate(180deg);
+    @media (min-width: 768px) {
+      transform: rotate(180deg);
+    }
   }
   button {
     display: flex;
