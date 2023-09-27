@@ -20,9 +20,9 @@ const monthList = [
 
 const getDatePickerValues = (startDate, endDate) => {
   const options = {
-    years: [],
-    months: [],
     days: [],
+    months: [],
+    years: [],
   };
 
   const yearsDiff = Math.abs(dayjs(startDate).diff(endDate, "years"));
@@ -107,9 +107,9 @@ const getDays = (year, month, minDate, maxDate) => {
   return days;
 };
 
-export default function TimeSelector() {
-  const startDate = dayjs("2020-04-01T16:00:00.000Z");
-  const endDate = dayjs("2022-08-09T16:00:00.000Z");
+export default function TimeSelector({ getDate }) {
+  const startDate = dayjs("1900-04-01T16:00:00.000Z");
+  const endDate = dayjs("2030-08-09T16:00:00.000Z");
 
   const [pickerOptions, setPickerOptions] = useState({
     ...getDatePickerValues(startDate, endDate),
@@ -118,10 +118,13 @@ export default function TimeSelector() {
   });
 
   const [selectedValues, setSelectedValues] = useState({
-    years: 2021,
-    months: monthList[startDate.get("month")],
     days: 1,
+    months: monthList[startDate.get("month")],
+    years: 2021,
   });
+  const applyDate = () => {
+    getDate(`${selectedValues.years}-${selectedValues.months}-${selectedValues.days}`);
+  };
 
   // Update the value in response to user picking event
   const handleChange = (name, value) => {
@@ -144,7 +147,7 @@ export default function TimeSelector() {
         months: getMonths(selectedValues.years, startDate, endDate),
       });
     }
-  }, [selectedValues?.years, selectedValues?.months]);
+  }, [selectedValues?.years, selectedValues?.months, selectedValues?.days]);
 
   useEffect(() => {
     if (!pickerOptions?.days.includes(selectedValues.days)) {
@@ -153,18 +156,17 @@ export default function TimeSelector() {
         days: pickerOptions?.days[0],
       });
     }
+    console.log(selectedValues);
   }, [pickerOptions]);
 
   return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
-
+    <div className="selector">
       <Picker
         valueGroups={pickerOptions ? selectedValues : null}
         onChange={handleChange}
         optionGroups={pickerOptions}
       />
+      <button onClick={applyDate}>Apply</button>
     </div>
   );
 }

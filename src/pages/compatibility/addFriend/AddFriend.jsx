@@ -7,12 +7,22 @@ import Loading from "../../../components/Loading";
 import axios from "axios";
 import notFound from "../../../assets/notFound.svg";
 import TimeSelector from "../../../components/compatibility/timeSelector/TimeSelector";
+import { styled } from "styled-components";
 
 const AddFriend = () => {
+  //date
+  const [showDate, setShowDate] = useState(false);
+  const [date, setDate] = useState("2000-09-23");
+  const getDate = (date) => {
+    setDate((prev) => date);
+    setShowDate(false);
+  };
+
   const navigate = useNavigate();
   // LOADING
   const [loadingSubmit, setLoadingSubmit] = useState(false);
   // FORM
+
   const [formData, setFormData] = useState({
     name: "",
     gender: "male", // Default gender selection
@@ -109,6 +119,13 @@ const AddFriend = () => {
       console.log(e);
     }
   };
+  useEffect(() => {
+    if (showDate) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [showDate]);
 
   return (
     <div>
@@ -163,16 +180,9 @@ const AddFriend = () => {
                   <div className="date">
                     <label htmlFor="date">Date of Birth*</label>
                     <div className="date-input-container">
-                      <input
-                        placeholder="YYYY-MM-DD"
-                        type="date"
-                        id="date"
-                        name="dateOfBirth"
-                        value={formData.dateOfBirth}
-                        onChange={handleChange}
-                        ref={dateInputRef}
-                        required
-                      />
+                      <div className="input" onClick={() => setShowDate(true)}>
+                        {date}
+                      </div>
                     </div>
                   </div>
                   <div className="birth">
@@ -237,7 +247,7 @@ const AddFriend = () => {
                 </div>
               )}
             </form>
-            <TimeSelector />
+            {showDate && <TimeSelector getDate={getDate} />}
           </div>
         </div>
       )}
