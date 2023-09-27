@@ -12,7 +12,7 @@ const ScrollerComponent = ({ min, max, value, setValue, title }) => {
   const [startTouchY, setStartTouchY] = useState(0);
   const [scrolling, setScrolling] = useState(false);
 
-  const scrollSpeed = 100; // Adjust the scroll speed here (milliseconds)
+  const scrollSpeed = 250; // Adjust the scroll speed here (milliseconds)
   const arr = ['', 'AM', 'PM']
   useEffect(() => {
     if (scrolling) {
