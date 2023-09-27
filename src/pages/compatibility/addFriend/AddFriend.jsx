@@ -6,6 +6,7 @@ import back from "../../../assets/back.svg";
 import Loading from "../../../components/Loading";
 import axios from "axios";
 import notFound from "../../../assets/notFound.svg";
+import TimeSelector from "../../../components/compatibility/timeSelector/TimeSelector";
 
 const AddFriend = () => {
   const navigate = useNavigate();
@@ -236,6 +237,7 @@ const AddFriend = () => {
                 </div>
               )}
             </form>
+            <TimeSelector />
           </div>
         </div>
       )}
