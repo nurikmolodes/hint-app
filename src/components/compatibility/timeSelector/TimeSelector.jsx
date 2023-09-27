@@ -33,7 +33,7 @@ export default function TimeSelector() {
       />
       <span>{selectedHour},</span>
       <span>{selectedMinute},</span>
-      <span>{selectedSecond}</span>
+      <span>{selectedSecond === 0 ? 'AM' : 'PM'}</span>
     </MainContainer>
   );
 }
