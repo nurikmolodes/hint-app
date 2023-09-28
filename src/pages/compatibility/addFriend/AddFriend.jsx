@@ -6,23 +6,14 @@ import back from "../../../assets/back.svg";
 import Loading from "../../../components/Loading";
 import axios from "axios";
 import notFound from "../../../assets/notFound.svg";
+import DateSelector from "../../../components/compatibility/dateSelector/DateSelector";
 import TimeSelector from "../../../components/compatibility/timeSelector/TimeSelector";
-import { styled } from "styled-components";
 
 const AddFriend = () => {
-  //date
-  const [showDate, setShowDate] = useState(false);
-  const [date, setDate] = useState("2000-09-23");
-  const getDate = (date) => {
-    setDate((prev) => date);
-    setShowDate(false);
-  };
-
   const navigate = useNavigate();
   // LOADING
   const [loadingSubmit, setLoadingSubmit] = useState(false);
   // FORM
-
   const [formData, setFormData] = useState({
     name: "",
     gender: "male", // Default gender selection
@@ -31,10 +22,22 @@ const AddFriend = () => {
     placeOfBirth: "",
     unknownTimeOfBirth: false,
   });
+  //date
+  const [showDate, setShowDate] = useState(false);
+  const getDate = (date) => {
+    setFormData({ ...formData, dateOfBirth: date });
+    setShowDate(false);
+  };
+  //time
+  const [showTime, setShowTime] = useState(false);
+  const getTime = (date) => {
+    setFormData({ ...formData, timeOfBirth: date });
+    setShowTime(false);
+  };
   // DATE
   const handleUnknownTimeOfBirthChange = () => {
     const newUnknownTimeOfBirth = !formData.unknownTimeOfBirth;
-    const newTimeOfBirth = newUnknownTimeOfBirth ? "12:00" : "00:00"; // Set to default if unknown
+    const newTimeOfBirth = newUnknownTimeOfBirth ? "12:00 PM" : "00:00"; // Set to default if unknown
     setFormData({
       ...formData,
       unknownTimeOfBirth: newUnknownTimeOfBirth,
@@ -120,12 +123,12 @@ const AddFriend = () => {
     }
   };
   useEffect(() => {
-    if (showDate) {
+    if (showDate || showTime) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
-  }, [showDate]);
+  }, [showDate, showTime]);
 
   return (
     <div>
@@ -181,19 +184,15 @@ const AddFriend = () => {
                     <label htmlFor="date">Date of Birth*</label>
                     <div className="date-input-container">
                       <div className="input" onClick={() => setShowDate(true)}>
-                        {date}
+                        {formData.dateOfBirth}
                       </div>
                     </div>
                   </div>
                   <div className="birth">
                     <label onClick={handleButtonClick}>Time of Birth*</label>
-                    <input
-                      type="time"
-                      name="timeOfBirth"
-                      value={formData.timeOfBirth}
-                      onChange={handleChange}
-                      required
-                    />
+                    <div className="input" onClick={() => setShowTime(true)}>
+                      {formData.timeOfBirth}
+                    </div>
                     <p>
                       Don’t worry if you don’t know the exact birth time, you can still find plenty
                       of insights using the default setting.
@@ -247,7 +246,8 @@ const AddFriend = () => {
                 </div>
               )}
             </form>
-            {showDate && <TimeSelector getDate={getDate} />}
+            {showDate && <DateSelector getDate={getDate} />}
+            {showTime && <TimeSelector getTime={getTime} />}
           </div>
         </div>
       )}

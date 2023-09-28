@@ -4,126 +4,106 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 
 const monthList = [
-  "january",
-  "february",
-  "march",
-  "april",
-  "may",
-  "june",
-  "july",
-  "august",
-  "september",
-  "october",
-  "november",
-  "december",
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 
-const getDatePickerValues = (startDate, endDate) => {
+const getDatePickerValues = () => {
   const options = {
     days: [],
-    months: [],
     years: [],
+    months: [],
   };
 
-  const yearsDiff = Math.abs(dayjs(startDate).diff(endDate, "years"));
-  for (let i = 0; i <= yearsDiff; i++) {
-    let currentDate = dayjs(startDate).add(i, "year");
-    options.years.push(currentDate.get("year"));
-  }
-
-  let currentDate = startDate.date(1);
-  for (let i = 0; currentDate <= endDate.date(1); i++) {
-    currentDate = dayjs(startDate).add(i, "month");
-
-    if (currentDate <= endDate) {
-      let monthIndex = currentDate.get("month");
-      const month = monthList[monthIndex];
-      !options.months.includes(month) && options.months.push(month);
-    }
-  }
-
-  // console.log(options.months);
+  options.years = [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "28",
+    "29",
+    "30",
+    "31",
+    "32",
+    "33",
+    "34",
+    "35",
+    "36",
+    "37",
+    "38",
+    "39",
+    "40",
+    "41",
+    "42",
+    "43",
+    "44",
+    "45",
+    "46",
+    "47",
+    "48",
+    "49",
+    "50",
+    "51",
+    "52",
+    "53",
+    "54",
+    "55",
+    "56",
+    "57",
+    "58",
+    "59",
+  ];
+  console.log(options);
   return options;
 };
 
-const getLastDayOfMonth = (year, month) => {
-  const lastDay = daysInMonth(year, month);
-  return lastDay < 10 ? `0${lastDay}` : lastDay;
-};
-function daysInMonth(year, month) {
-  return new Date(year, month, 0).getDate();
-}
-
-const getMonths = (year, minDate, maxDate) => {
-  const months = [];
-
-  let firstDate = dayjs().year(year).month(0).date(1);
-  if (firstDate < minDate) {
-    firstDate = minDate;
-  }
-
-  let lastDate = dayjs().year(year).month(11).date(31);
-  if (lastDate > maxDate) {
-    lastDate = maxDate;
-  }
-
-  let currentDate = firstDate;
-
-  for (let i = 0; currentDate <= lastDate; i++) {
-    currentDate = dayjs(firstDate).add(i, "month");
-    if (currentDate <= lastDate) {
-      let monthIndex = currentDate.get("month");
-      const month = monthList[monthIndex];
-      months.push(month);
-    }
-  }
-
-  console.log({ months });
-  return months;
-};
-
-const getDays = (year, month, minDate, maxDate) => {
-  const formattedMonth = month < 10 ? `0${month}` : month;
-  const days = [];
-  let startDate = dayjs(`${year}-${formattedMonth}-01T16:00:00.000Z`);
-  if (startDate < minDate) {
-    startDate = minDate;
-  }
-
-  const lastDay = getLastDayOfMonth(year, month);
-  let endDate = dayjs(`${year}-${formattedMonth}-${lastDay}T16:00:00.000Z`);
-
-  if (endDate > maxDate) {
-    endDate = maxDate;
-  }
-
-  const daysDiff = Math.abs(dayjs(startDate).diff(endDate, "days", true));
-  for (let i = 0; i <= daysDiff; i++) {
-    let currentDate = dayjs(startDate).add(i, "day");
-    const day = currentDate.get("date");
-    days.push(day);
-  }
-  console.log(days);
-  return days;
-};
-
-export default function TimeSelector({ getDate }) {
-  const startDate = dayjs("1900-04-01T16:00:00.000Z");
-  const endDate = dayjs("2030-08-09T16:00:00.000Z");
-
+export default function TimeSelector({ getTime }) {
   const [pickerOptions, setPickerOptions] = useState({
-    ...getDatePickerValues(startDate, endDate),
+    ...getDatePickerValues(),
     days: [0, 1],
     // days: getDays(startDate.get("year"), startDate.get("month"))
   });
 
   const [selectedValues, setSelectedValues] = useState({
-    days: 1,
-    months: monthList[startDate.get("month")],
     years: 2021,
+    days: 1,
+    months: ["AM"],
   });
   const applyDate = () => {
-    getDate(`${selectedValues.years}-${selectedValues.months}-${selectedValues.days}`);
+    getTime(`${selectedValues.days}:${selectedValues.years} ${selectedValues.months}`);
   };
 
   // Update the value in response to user picking event
@@ -142,10 +122,11 @@ export default function TimeSelector({ getDate }) {
       const monthIndex = monthList.indexOf(selectedValues.months) + 1;
 
       setPickerOptions({
-        ...getDatePickerValues(startDate, endDate),
-        days: getDays(selectedValues.years, monthIndex, startDate, endDate),
-        months: getMonths(selectedValues.years, startDate, endDate),
+        ...getDatePickerValues(),
+        days: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        months: ["AM", "PM"],
       });
+      console.log(pickerOptions);
     }
   }, [selectedValues?.years, selectedValues?.months, selectedValues?.days]);
 
