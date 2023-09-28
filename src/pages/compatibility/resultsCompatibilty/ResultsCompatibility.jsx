@@ -9,7 +9,8 @@ import InActiveFriendship from "../../../assets/InActiveFriendship.svg";
 import Romantic from "../../../components/compatibility/Romantic";
 import Friendship from "../../../components/compatibility/Friendship";
 
-const ResultsCompatibility = () => {
+const ResultsCompatibility = ({ match }) => {
+  console.log(match);
   const navigate = useNavigate();
   const [options, setOptions] = useState([
     {
@@ -57,7 +58,7 @@ const ResultsCompatibility = () => {
           </button>
         ))}
       </div>
-      {option === "Romantic" ? <Romantic /> : <Friendship />}
+      {option === "Romantic" ? <Romantic match={match} /> : <Friendship match={match} />}
     </div>
   );
 };

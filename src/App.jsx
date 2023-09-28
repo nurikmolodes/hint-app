@@ -12,37 +12,16 @@ import DetailCharacteristic from "./pages/compatibility/detailCharacteristisc/De
 import axios from "axios";
 
 function App() {
+  // Check if the current pathname is in the navbarRoutes array
   const location = useLocation();
   const footerRoutes = ["/", "/compatibility", "/horoscope", "/you", "/guidance"];
-  // Check if the current pathname is in the navbarRoutes array
   const shouldDisplayNavbar = footerRoutes.includes(location.pathname);
-
-  const [user, setUser] = useState(null);
-
-  const data = {
-    email: "nurikgentle@gmail.com",
-    password: "ND#3XAb",
+  const [match, setMatch] = useState([]);
+  const getTheResultsCompatibility = (data) => {
+    console.log(data);
+    setMatch(data);
   };
-
-  const handleSubmit = () => {
-    // Send a POST request using Axios
-    axios
-      .post("https://api.astropulse.app/api/auth", data, {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      })
-      .then((response) => {
-        console.log("Response:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  };
-
-  useEffect(() => {
-    handleSubmit();
-  }, []);
+  console.log(match);
 
   const routes = [
     {
@@ -67,17 +46,17 @@ function App() {
     },
     {
       path: "/addfriend",
-      component: <AddFriend />,
+      component: <AddFriend getTheResultsCompatibility={getTheResultsCompatibility} />,
       label: "Add Friend",
     },
     {
       path: "/resultsCompatibility",
-      component: <ResultsCompatibilty />,
+      component: <ResultsCompatibilty match={match} />,
       label: "Results Compatibilty",
     },
     {
       path: "/:CharacteristicId",
-      component: <DetailCharacteristic />,
+      component: <DetailCharacteristic match={match} />,
       label: "Characteristic",
     },
   ];

@@ -103,7 +103,8 @@ export default function TimeSelector({ getTime }) {
     months: ["AM"],
   });
   const applyDate = () => {
-    getTime(`${selectedValues.days}:${selectedValues.years} ${selectedValues.months}`);
+    getTime(`${selectedValues.days}:${selectedValues.years}
+    `);
   };
 
   // Update the value in response to user picking event

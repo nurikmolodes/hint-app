@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./AddFriend.scss";
 import { Link, useNavigate } from "react-router-dom";
-import user from "../../../assets/male.svg";
+import userImage from "../../../assets/male.svg";
 import back from "../../../assets/back.svg";
 import Loading from "../../../components/Loading";
 import axios from "axios";
@@ -9,7 +9,35 @@ import notFound from "../../../assets/notFound.svg";
 import DateSelector from "../../../components/compatibility/dateSelector/DateSelector";
 import TimeSelector from "../../../components/compatibility/timeSelector/TimeSelector";
 
-const AddFriend = () => {
+const AddFriend = ({ getTheResultsCompatibility }) => {
+  // USER
+  const [user, setUser] = useState(null);
+
+  const data = {
+    email: "nurikgentle@gmail.com",
+    password: "ND#3XAb",
+  };
+
+  const getUser = () => {
+    // Send a POST request using Axios
+    axios
+      .post("https://api.astropulse.app/api/auth", data, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      })
+      .then((response) => {
+        console.log("Response:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
   const navigate = useNavigate();
   // LOADING
   const [loadingSubmit, setLoadingSubmit] = useState(false);
@@ -37,7 +65,7 @@ const AddFriend = () => {
   // DATE
   const handleUnknownTimeOfBirthChange = () => {
     const newUnknownTimeOfBirth = !formData.unknownTimeOfBirth;
-    const newTimeOfBirth = newUnknownTimeOfBirth ? "12:00 PM" : "00:00"; // Set to default if unknown
+    const newTimeOfBirth = newUnknownTimeOfBirth ? "12:00" : "00:00"; // Set to default if unknown
     setFormData({
       ...formData,
       unknownTimeOfBirth: newUnknownTimeOfBirth,
@@ -76,10 +104,43 @@ const AddFriend = () => {
     });
   };
   // SUBMIT FORM
-  const handleSubmit = (event) => {
+  console.log(user);
+  const params = {
+    yourGender: "Male",
+    yourInfo: {
+      dateOfBirth: user?.info?.birth_date || "2001-04-07",
+      timeOfBirth: user?.info.birth_time || "10:67",
+      lat: "7.57944",
+      lon: "-8.53778",
+    },
+    partnerInfo: {
+      dateOfBirth: formData.dateOfBirth,
+      timeOfBirth: formData.timeOfBirth,
+      lat: "7.57944",
+      lon: "-8.53778",
+    },
+    relationshipStatus: "crush",
+  };
+  const handleSubmit = async (event) => {
     setLoadingSubmit(true);
     event.preventDefault();
     console.log(formData);
+    try {
+      const response = await axios.post(
+        "https://api.astropulse.app/api/astro/compatibility",
+        params,
+        {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJ0b2tlbklkIjoiMTcxZTk2MTEtNzkwYy00ZjU4LWI5ZmUtMmM2ODAyZDljYjg1IiwiaWF0IjoxNjk1NzkyNjQ2fQ.Xo9EZCWwa7S4iN-O5MupiKmQpMXtuH1JXGZ5kMf6fSE`,
+          },
+        },
+      );
+      // Handle the response here (e.g., update state with the response data)
+      getTheResultsCompatibility(response.data);
+    } catch (error) {
+      // Handle errors here
+      console.error("Error:", error);
+    }
     // Handle form submission here, e.g., send data to a server
     setTimeout(() => {
       setLoadingSubmit(false);
@@ -145,7 +206,7 @@ const AddFriend = () => {
                   </Link>
                 </div>
                 <div className="user">
-                  <img src={user} />
+                  <img src={userImage} />
                 </div>
               </header>
             )}

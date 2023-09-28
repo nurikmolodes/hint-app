@@ -8,21 +8,19 @@ import basic from "../../assets/basic.svg";
 import emotion from "../../assets/emotion.svg";
 import "../../styles/Friendship.scss";
 
-const Friendship = () => {
+const Friendship = ({ match }) => {
   const characteristics = [
     {
-      id: 1,
+      id: 'basic-friend',
       title: "Basic Identities",
-      content:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.",
+      content: match.friendship_report[0].slice(0, 165) + "..." || "",
       img: basic,
       titleColor: "#E48D21",
     },
     {
-      id: 2,
+      id: 'emotion-friend',
       title: "Emotional Styles",
-      content:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.",
+      content: match.friendship_report[4].slice(0, 165) + "..." || "",
       img: emotion,
       titleColor: "#5480F0",
     },
@@ -40,7 +38,12 @@ const Friendship = () => {
             <img src={daniel} />
             <span>Daniel</span>
           </div>
-          <div class="progress-bar">
+          <div
+            class="progress-bar"
+            style={{
+              background: `radial-gradient(closest-side, #fff1f3 79%, transparent 80% 100%), conic-gradient(#ffe447 ${match?.compatibility_percentage}%, #fff1f3 0)`,
+            }}>
+            {match?.compatibility_percentage}%
             <img src={threeHearts} />
           </div>
           <div className="user">

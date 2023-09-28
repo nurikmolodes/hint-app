@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./DetailCharacteristic.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import back from "../../../assets/back.svg";
 import share from "../../../assets/share.svg";
 
-const DetailCharacteristic = () => {
+const DetailCharacteristic = ({ match }) => {
+  const { CharacteristicId } = useParams();
+  console.log(CharacteristicId);
   const navigate = useNavigate();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="detail-characteristic">
       <header>
@@ -18,10 +23,12 @@ const DetailCharacteristic = () => {
       <div className="basic-identities">
         <h3>Basic Identities</h3>
         <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-          been the industry's standard dummy text ever since.Lorem Ipsum is simply dummy text of the
-          printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-          ever since.
+          {CharacteristicId === "basic-romantic" && match?.love_report?.slice(0, 4).map((a) => a)}
+          {CharacteristicId === "emotional-romantic" && match?.love_report?.slice(3).map((a) => a)}
+          {CharacteristicId === "basic-friend" &&
+            match?.friendship_report?.slice(0, 4).map((a) => a)}
+          {CharacteristicId === "emotion-friend" &&
+            match?.friendship_report?.slice(4).map((a) => a)}
         </p>
         <div className="duo">
           <div className="first">
@@ -59,10 +66,7 @@ const DetailCharacteristic = () => {
           <h5>Pros</h5>
         </div>
         <ul>
-          <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>
-          <li>Lorem Ipsum has been the industry's standard dummy text ever since.</li>
-          <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>
-          <li> Lorem Ipsum has been the industry's standard dummy text ever since.</li>
+          <li>{match?.compatibility_report}</li>
         </ul>
       </div>
     </div>
