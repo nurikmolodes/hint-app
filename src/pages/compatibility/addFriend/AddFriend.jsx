@@ -116,6 +116,7 @@ const AddFriend = ({ getTheResultsCompatibility }) => {
     partnerInfo: {
       dateOfBirth: formData.dateOfBirth,
       timeOfBirth: formData.timeOfBirth,
+      name: formData.name,
       lat: "7.57944",
       lon: "-8.53778",
     },
@@ -136,7 +137,7 @@ const AddFriend = ({ getTheResultsCompatibility }) => {
         },
       );
       // Handle the response here (e.g., update state with the response data)
-      getTheResultsCompatibility(response.data);
+      getTheResultsCompatibility({ ...response.data, partnerName: formData.name });
     } catch (error) {
       // Handle errors here
       console.error("Error:", error);

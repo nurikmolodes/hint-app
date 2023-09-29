@@ -7,18 +7,19 @@ import share from "../../assets/shareScore.svg";
 import basic from "../../assets/basic.svg";
 import emotion from "../../assets/emotion.svg";
 import "../../styles/Friendship.scss";
+import { Document, Page, Text, View, StyleSheet, PDFDownloadLink } from "@react-pdf/renderer";
 
-const Friendship = ({ match }) => {
+const Friendship = ({ match, user }) => {
   const characteristics = [
     {
-      id: 'basic-friend',
+      id: "basic-friend",
       title: "Basic Identities",
       content: match.friendship_report[0].slice(0, 165) + "..." || "",
       img: basic,
       titleColor: "#E48D21",
     },
     {
-      id: 'emotion-friend',
+      id: "emotion-friend",
       title: "Emotional Styles",
       content: match.friendship_report[4].slice(0, 165) + "..." || "",
       img: emotion,
@@ -30,13 +31,55 @@ const Friendship = ({ match }) => {
   const navigateToAnotherPage = (id) => {
     navigate(`/${id}`);
   };
+  const styles = StyleSheet.create({
+    page: {
+      flexDirection: "column",
+      margin: 10,
+      padding: 10,
+    },
+    section: {
+      margin: 10,
+      padding: 10,
+    },
+    title: {
+      fontSize: 18,
+      marginBottom: 10,
+    },
+    paragraph: {
+      fontSize: 12,
+      marginBottom: 10,
+    },
+  });
+  const generatePDF = () => {
+    return (
+      <Document>
+        <Page size="A4" style={styles.page}>
+          <Text style={styles.title}>Friendship</Text>
+
+          <Text style={styles.title}>Friendship Report:</Text>
+          {match.friendship_report.map((paragraph, index) => (
+            <View key={index} style={styles.section}>
+              <Text style={styles.paragraph}>{`${index + 1}. ${paragraph}`}</Text>
+            </View>
+          ))}
+
+
+          <Text style={styles.title}>Compatibility Report:</Text>
+          <Text style={styles.paragraph}>{match.compatibility_report}</Text>
+
+          <Text style={styles.title}>Compatibility Percentage:</Text>
+          <Text style={styles.paragraph}>{`${match?.compatibility_percentage}%`}</Text>
+        </Page>
+      </Document>
+    );
+  };
   return (
     <div className="friendship">
       <div className="match">
         <div className="users">
           <div className="user">
             <img src={daniel} />
-            <span>Daniel</span>
+            <span>{user?.info?.name}</span>
           </div>
           <div
             class="progress-bar"
@@ -48,7 +91,7 @@ const Friendship = ({ match }) => {
           </div>
           <div className="user">
             <img src={lora} />
-            <span>Lora</span>
+            <span>{match?.partnerName}</span>
           </div>
         </div>
         <div className="share">
@@ -65,7 +108,11 @@ const Friendship = ({ match }) => {
         ))}
       </div>
       <div className="button">
-        <button>Save Report</button>
+        <button>
+          <PDFDownloadLink document={generatePDF()} fileName="report.pdf">
+            {({ blob, url, loading, error }) => (loading ? "Loading document..." : "Save Report")}
+          </PDFDownloadLink>
+        </button>
       </div>
     </div>
   );

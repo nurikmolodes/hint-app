@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ResultsCompatibility.scss";
 import back from "../../../assets/back.svg";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import InActiveRomantic from "../../../assets/inActiveRomantic.svg";
 import InActiveFriendship from "../../../assets/InActiveFriendship.svg";
 import Romantic from "../../../components/compatibility/Romantic";
 import Friendship from "../../../components/compatibility/Friendship";
+import axios from "axios";
 
 const ResultsCompatibility = ({ match }) => {
   console.log(match);
@@ -38,6 +39,34 @@ const ResultsCompatibility = ({ match }) => {
     }));
     setOptions(updatedOptions);
   };
+  // USER
+  const [user, setUser] = useState(null);
+
+  const data = {
+    email: "nurikgentle@gmail.com",
+    password: "ND#3XAb",
+  };
+
+  const getUser = () => {
+    // Send a POST request using Axios
+    axios
+      .post("https://api.astropulse.app/api/auth", data, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      })
+      .then((response) => {
+        console.log("Response:", response.data);
+        setUser(response.data)
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
   return (
     <div className="resultsCompatibility">
       <header>
@@ -58,7 +87,11 @@ const ResultsCompatibility = ({ match }) => {
           </button>
         ))}
       </div>
-      {option === "Romantic" ? <Romantic match={match} /> : <Friendship match={match} />}
+      {option === "Romantic" ? (
+        <Romantic user={user} match={match} />
+      ) : (
+        <Friendship user={user} match={match} />
+      )}
     </div>
   );
 };
