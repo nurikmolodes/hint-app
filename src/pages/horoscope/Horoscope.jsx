@@ -20,6 +20,7 @@ const Horoscope = () => {
   // USER
   const [user, setUser] = useState(null);
   const [horoscope, setHoroscope] = useState([]);
+  const [loadingHoroscope, setLoadingHoroscope] = useState(true);
   console.log(horoscope);
   const params = {
     email: "nurikgentle@gmail.com",
@@ -58,6 +59,7 @@ const Horoscope = () => {
       );
       // Handle the response here (e.g., update state with the response data)
       setHoroscope({ ...response.data });
+      setLoadingHoroscope(false);
     } catch (error) {
       // Handle errors here
       console.error("Error:", error);
@@ -85,7 +87,7 @@ const Horoscope = () => {
           </div>
         ))}
       </div>
-      <HoroscopeContent horoscope={horoscope} />
+      <HoroscopeContent horoscope={horoscope} loadingHoroscope={loadingHoroscope} />
     </div>
   );
 };
