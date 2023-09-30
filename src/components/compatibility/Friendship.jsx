@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import lora from "../../assets/lora.svg";
 import daniel from "../../assets/daniel.svg";
 import threeHearts from "../../assets/threeStars.svg";
-import share from "../../assets/shareScore.svg";
+import shareImage from "../../assets/shareScore.svg";
 import basic from "../../assets/basic.svg";
 import emotion from "../../assets/emotion.svg";
 import "../../styles/Friendship.scss";
 import { Document, Page, Text, View, StyleSheet, PDFDownloadLink } from "@react-pdf/renderer";
+import Share from "./share/Share";
+import html2canvas from "html2canvas";
 
 const Friendship = ({ match, user }) => {
   const characteristics = [
@@ -63,7 +65,6 @@ const Friendship = ({ match, user }) => {
             </View>
           ))}
 
-
           <Text style={styles.title}>Compatibility Report:</Text>
           <Text style={styles.paragraph}>{match.compatibility_report}</Text>
 
@@ -73,10 +74,31 @@ const Friendship = ({ match, user }) => {
       </Document>
     );
   };
+  const [share, setShare] = useState(false);
+
+  const componentRef = useRef(null);
+
+  const captureAsPng = () => {
+    if (componentRef.current) {
+      html2canvas(componentRef.current).then((canvas) => {
+        // Convert canvas to a data URL
+        const image = canvas.toDataURL("image/png");
+
+        // Create a download link
+        const a = document.createElement("a");
+        a.href = image;
+        a.download = "component.png";
+
+        // Trigger a click event to download the image
+        a.click();
+      });
+    }
+  };
+
   return (
     <div className="friendship">
       <div className="match">
-        <div className="users">
+        <div className="users" ref={componentRef}>
           <div className="user">
             <img src={daniel} />
             <span>{user?.info?.name}</span>
@@ -94,8 +116,9 @@ const Friendship = ({ match, user }) => {
             <span>{match?.partnerName}</span>
           </div>
         </div>
-        <div className="share">
-          <img src={share} />
+        <div className="share" onClick={captureAsPng}>
+          <img src={shareImage} onClick={() => setShare(!share)} />
+          {share && <Share description={"The results of a Friendship report"} match={match} />}
         </div>
       </div>
       <div className="characteristics">

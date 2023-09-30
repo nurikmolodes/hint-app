@@ -1,0 +1,35 @@
+.horoscope-content {
+  article {
+    border-radius: 8px;
+    margin-top: 30px;
+    padding: 15px;
+    background: url("../assets/pink.png");
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    h3 {
+      color: var(--Heading, #25282f);
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%; /* 24px */
+    }
+    p {
+      color: #646670;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%; /* 21px */
+    }
+  }
+  section {
+    margin-top: 20px;
+    p {
+      color: var(--Body, #646670);
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%; /* 21px */
+    }
+  }
+}

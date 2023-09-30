@@ -1,5 +1,5 @@
 import "../src/styles/App.scss";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Compatibility from "./pages/compatibility/Compatibility";
 import Horoscope from "./pages/horoscope/Horoscope";
 import Navigator from "./components/Navigator";
@@ -13,6 +13,7 @@ import axios from "axios";
 
 function App() {
   // Check if the current pathname is in the navbarRoutes array
+  const navigate = useNavigate();
   const location = useLocation();
   const footerRoutes = ["/", "/compatibility", "/horoscope", "/you", "/guidance"];
   const shouldDisplayNavbar = footerRoutes.includes(location.pathname);
@@ -60,6 +61,9 @@ function App() {
       label: "Characteristic",
     },
   ];
+  useEffect(() => {
+    navigate("/horoscope");
+  }, []);
   return (
     <div className="wrapper">
       <Routes>
