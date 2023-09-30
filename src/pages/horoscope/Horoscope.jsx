@@ -15,7 +15,10 @@ const Horoscope = () => {
   ];
 
   const handleItemClick = (text) => {
-    setActiveItem(text);
+    if (text.value !== activeItem.value) {
+      setLoadingHoroscope(true);
+      setActiveItem(text);
+    }
   };
   // USER
   const [user, setUser] = useState(null);
