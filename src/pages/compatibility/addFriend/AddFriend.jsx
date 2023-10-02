@@ -40,7 +40,7 @@ const AddFriend = ({ getTheResultsCompatibility }) => {
 
   const navigate = useNavigate();
   // LOADING
-  const [loadingSubmit, setLoadingSubmit] = useState(true);
+  const [loadingSubmit, setLoadingSubmit] = useState(false);
   // FORM
   const [formData, setFormData] = useState({
     name: "",
@@ -138,15 +138,13 @@ const AddFriend = ({ getTheResultsCompatibility }) => {
       );
       // Handle the response here (e.g., update state with the response data)
       getTheResultsCompatibility({ ...response.data, partnerName: formData.name });
+      // Handle form submission here, e.g., send data to a server
+      setLoadingSubmit(false);
+      navigate("/resultsCompatibility");
     } catch (error) {
       // Handle errors here
       console.error("Error:", error);
     }
-    // Handle form submission here, e.g., send data to a server
-    setTimeout(() => {
-      setLoadingSubmit(false);
-      navigate("/resultsCompatibility");
-    }, 5000);
   };
 
   // PLACES
