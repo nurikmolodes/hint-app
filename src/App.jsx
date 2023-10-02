@@ -62,7 +62,9 @@ function App() {
     },
   ];
   useEffect(() => {
-    navigate("/horoscope");
+    if (location.pathname === "/") {
+      navigate("/horoscope");
+    }
   }, []);
   return (
     <div className="wrapper">

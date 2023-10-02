@@ -1,15 +1,14 @@
 .loading {
   position: relative;
   width: 100%;
-  height: 1000px;
-  background: url("../assets/loading.svg");
+  // background: url("../assets/loading.svg");
   background-repeat: no-repeat !important;
   background-repeat: round;
   background-size: cover !important;
   background-position: right;
   text-align: center;
   @media (max-width: 550px) {
-    background: url("../assets/loadingPhone.svg");
+    // background: url("../assets/loadingPhone.svg");
     background-repeat: no-repeat !important;
     background-repeat: round;
     background-size: cover !important;

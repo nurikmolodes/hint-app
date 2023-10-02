@@ -40,7 +40,7 @@ const AddFriend = ({ getTheResultsCompatibility }) => {
 
   const navigate = useNavigate();
   // LOADING
-  const [loadingSubmit, setLoadingSubmit] = useState(false);
+  const [loadingSubmit, setLoadingSubmit] = useState(true);
   // FORM
   const [formData, setFormData] = useState({
     name: "",

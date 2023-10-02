@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
 import "../styles/Loading.scss";
+import Lottie from "lottie-react";
+import animationIpad from "../assets/ipad.json";
+import animationIphone from "../assets/iphone.json";
 
 const Loading = () => {
   useEffect(() => {
@@ -7,7 +10,11 @@ const Loading = () => {
   }, []);
   return (
     <div className="loading">
-      <p>Creating the report</p>
+      <Lottie
+        animationData={window.innerWidth > 500 ? animationIpad : animationIphone} // JSON данные анимации
+        loop={true} // Повторять ли анимацию
+        autoplay={true} // Автоматически ли проигрывать анимацию
+      />
     </div>
   );
 };
