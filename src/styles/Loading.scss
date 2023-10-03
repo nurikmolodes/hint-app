@@ -14,14 +14,15 @@
     background-size: cover !important;
     background-position: right;
   }
-  p {
+  span {
     color: #000;
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
     line-height: 150%; /* 27px */
     position: relative;
-    top: 5%;
+    top: 50px;
+    z-index: 5;
     background: url('../assets/backgroundUser.png');
   }
 }

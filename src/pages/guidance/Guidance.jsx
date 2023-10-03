@@ -1,10 +1,13 @@
-import React from 'react'
-import './Guidance.scss'
+import React from "react";
+import "./Guidance.scss";
+import Chat from "../../components/guidance/Chat";
 
 const Guidance = () => {
   return (
-    <div className='guidance'>Guidance</div>
-  )
-}
+    <div className="guidance">
+      <Chat />
+    </div>
+  );
+};
 
-export default Guidance
+export default Guidance;
