@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "../../styles/Chat.scss";
 import Send from "../../assets/Send.svg";
@@ -88,10 +88,15 @@ const Chat = () => {
       handleSendMessage(); // Call the function to send the message
     }
   };
+  const chatContainerRef = useRef(null);
+  useEffect(() => {
+    // Scroll to the bottom of the chat container when messages change
+    chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+  }, [messages]);
 
   return (
     <div className="chat-app">
-      <div className="chat-container">
+      <div className="chat-container" ref={chatContainerRef}>
         {messages.map((message, index) => (
           <div
             key={index}
