@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "../../styles/Chat.scss";
-import Send from "../../assets/Send.svg";
+import Send from "../../assets/send.svg";
 import avatar from "../../assets/avatar.svg";
 
 const Chat = () => {
