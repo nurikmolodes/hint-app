@@ -1,16 +1,47 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import '../../styles/Chat.scss'
+import "../../styles/Chat.scss";
+import Send from "../../assets/Send.svg";
+import avatar from "../../assets/avatar.svg";
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
+  console.log(messages);
   const [userMessage, setUserMessage] = useState("");
   const [accessToken, setAccessToken] = useState(
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJ0b2tlbklkIjoiMTcxZTk2MTEtNzkwYy00ZjU4LWI5ZmUtMmM2ODAyZDljYjg1IiwiaWF0IjoxNjk1NzkyNjQ2fQ.Xo9EZCWwa7S4iN-O5MupiKmQpMXtuH1JXGZ5kMf6fSE",
   ); // Replace with your actual token
 
+  // Load chat history from sessionStorage when the component mounts
+  useEffect(() => {
+    const savedMessages = sessionStorage.getItem("chatMessages");
+    if (savedMessages) {
+      setMessages(JSON.parse(savedMessages));
+    }
+  }, []);
+
+  // Save chat history to sessionStorage whenever messages are updated
+  useEffect(() => {
+    sessionStorage.setItem("chatMessages", JSON.stringify(messages));
+  }, [messages]);
+
   const handleUserMessageChange = (e) => {
     setUserMessage(e.target.value);
+  };
+
+  const getCurrentTime = () => {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const ampm = hours >= 12 ? "PM" : "AM";
+
+    // Convert hours to 12-hour format
+    const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+
+    // Add leading zeros to minutes if necessary
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+    return `${formattedHours}:${formattedMinutes} ${ampm}`;
   };
 
   const handleSendMessage = async () => {
@@ -19,6 +50,7 @@ const Chat = () => {
     const newUserMessage = {
       role: "user",
       content: userMessage,
+      timestamp: getCurrentTime(), // Add the timestamp
     };
 
     // Create a new array with the user's message and existing messages
@@ -49,6 +81,13 @@ const Chat = () => {
       console.error("Error sending message:", error);
     }
   };
+  // Handle sending a message when Enter or Spacebar is pressed
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault(); // Prevent the default behavior (e.g., form submission)
+      handleSendMessage(); // Call the function to send the message
+    }
+  };
 
   return (
     <div className="chat-app">
@@ -57,18 +96,43 @@ const Chat = () => {
           <div
             key={index}
             className={`message ${message.role === "assistant" ? "assistant" : "user"}`}>
-            {message.content}
+            {message.role === "assistant" && <img className="avatar" src={avatar} />}
+            <div className={`message-content ${message.role === "assistant" && "yes"}`}>
+              <h5>{message.role === "assistant" && message.role.toUpperCase()}</h5>
+              <p>{message.content}</p>
+            </div>
+            <div className="message-timestamp">
+              <span>{message.timestamp}</span>
+              <span>
+                {message.role === "user" && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none">
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M8.35359 8.35359L10.8536 5.85359L10.1465 5.14648L7.64648 7.64648L8.35359 8.35359ZM3.14648 8.35359L5.64648 10.8536L6.35359 10.1465L3.85359 7.64648L3.14648 8.35359ZM8.50004 11.2071L13.8536 5.85359L13.1465 5.14648L8.50004 9.79293L6.35359 7.64648L5.64648 8.35359L8.50004 11.2071Z"
+                      fill="#646670"
+                    />
+                  </svg>
+                )}
+              </span>
+            </div>
           </div>
         ))}
       </div>
       <div className="user-input">
         <input
           type="text"
-          placeholder="Type your message..."
+          placeholder="Type your question here..."
           value={userMessage}
           onChange={handleUserMessageChange}
+          onKeyDown={handleKeyDown}
         />
-        <button onClick={handleSendMessage}>Send</button>
+        <img onClick={handleSendMessage} src={Send} />
       </div>
     </div>
   );
