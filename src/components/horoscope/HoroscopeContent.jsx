@@ -46,7 +46,6 @@ const HoroscopeContent = ({ horoscope, loadingHoroscope, loadingMainInfo, mainIn
         <div className="loading-content">
           <Card width="100%" sx={{ boxShadow: "none" }}>
             <CardContent width="100%">
-              <Skeleton animation="wave" height={15} style={{ marginBottom: 10 }} width="20%" />
               <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
               <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
               <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
