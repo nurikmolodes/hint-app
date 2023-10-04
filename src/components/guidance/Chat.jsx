@@ -83,7 +83,7 @@ const Chat = () => {
   };
   // Handle sending a message when Enter or Spacebar is pressed
   const handleKeyDown = (e) => {
-    if (e.key === "Enter" || e.key === " ") {
+    if (e.key === "Enter") {
       e.preventDefault(); // Prevent the default behavior (e.g., form submission)
       handleSendMessage(); // Call the function to send the message
     }
