@@ -22,7 +22,7 @@
   .message-content {
     h5 {
       color: var(--Heading, #25282f);
-      font-size: 14px;
+      font-size: 15px;
       font-style: normal;
       font-weight: 700;
       line-height: 150%; /* 21px */
@@ -30,7 +30,7 @@
   }
   .message-timestamp {
     color: var(--Body, #646670);
-    font-size: 10px;
+    font-size: 11px;
     font-style: normal;
     font-weight: 400;
     display: flex;
@@ -47,7 +47,7 @@
   .assistant {
     align-self: flex-start;
     color: var(--Body, #646670);
-    font-size: 14px;
+    font-size: 15px;
     font-style: normal;
     font-weight: 400;
     line-height: 150%; /* 21px */
@@ -66,7 +66,7 @@
     color: white;
     align-self: flex-end;
     color: var(--Body, #646670);
-    font-size: 14px;
+    font-size: 15px;
     font-style: normal;
     font-weight: 400;
     line-height: 150%; /* 21px */

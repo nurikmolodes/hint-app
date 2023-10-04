@@ -1,4 +1,5 @@
 .horoscope-content {
+  width: 100%;
   .loading-content {
     // display: flex;
     // justify-content: center;
@@ -12,17 +13,17 @@
     background: url("../assets/pink.png");
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 20px;
     h3 {
       color: var(--Heading, #25282f);
-      font-size: 16px;
+      font-size: 17px;
       font-style: normal;
       font-weight: 700;
       line-height: 150%; /* 24px */
     }
     p {
       color: #646670;
-      font-size: 14px;
+      font-size: 15px;
       font-style: normal;
       font-weight: 400;
       line-height: 150%; /* 21px */
@@ -32,7 +33,7 @@
     margin-top: 20px;
     p {
       color: var(--Body, #646670);
-      font-size: 14px;
+      font-size: 15px;
       font-style: normal;
       font-weight: 400;
       line-height: 150%; /* 21px */

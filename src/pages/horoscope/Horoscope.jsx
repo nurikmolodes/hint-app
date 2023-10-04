@@ -16,6 +16,7 @@ const Horoscope = () => {
 
   const handleItemClick = (text) => {
     if (text.value !== activeItem.value) {
+      setLoadingMainInfo(true);
       setLoadingHoroscope(true);
       setActiveItem(text);
     }
@@ -23,7 +24,9 @@ const Horoscope = () => {
   // USER
   const [user, setUser] = useState(null);
   const [horoscope, setHoroscope] = useState([]);
+  const [mainInfo, setMainInfo] = useState([]);
   const [loadingHoroscope, setLoadingHoroscope] = useState(true);
+  const [loadingMainInfo, setLoadingMainInfo] = useState(true);
   console.log(horoscope);
   const params = {
     email: "nurikgentle@gmail.com",
@@ -68,11 +71,31 @@ const Horoscope = () => {
       console.error("Error:", error);
     }
   };
+  const getMainInfo = async () => {
+    try {
+      const response = await axios.post(
+        `https://api.astropulse.app/api/astro/personality_report`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJ0b2tlbklkIjoiMTcxZTk2MTEtNzkwYy00ZjU4LWI5ZmUtMmM2ODAyZDljYjg1IiwiaWF0IjoxNjk1NzkyNjQ2fQ.Xo9EZCWwa7S4iN-O5MupiKmQpMXtuH1JXGZ5kMf6fSE`,
+          },
+        },
+      );
+      // Handle the response here (e.g., update state with the response data)
+      setMainInfo({ ...response.data });
+      setLoadingMainInfo(false);
+    } catch (error) {
+      // Handle errors here
+      console.error("Error:", error);
+    }
+  };
   useEffect(() => {
     getUser();
   }, []);
   useEffect(() => {
     getHoroscope(activeItem);
+    getMainInfo();
   }, [activeItem.value]);
   return (
     <div className="horoscope">
@@ -90,7 +113,12 @@ const Horoscope = () => {
           </div>
         ))}
       </div>
-      <HoroscopeContent horoscope={horoscope} loadingHoroscope={loadingHoroscope} />
+      <HoroscopeContent
+        mainInfo={mainInfo}
+        horoscope={horoscope}
+        loadingHoroscope={loadingHoroscope}
+        loadingMainInfo={loadingMainInfo}
+      />
     </div>
   );
 };
