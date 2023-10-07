@@ -13,19 +13,19 @@ const Questions = () => {
       title: "Test compatibiluty in love and friendship",
       img: together,
       content:
-        "We’ve got all the intel on your relationships with friends, romantic partners and crusher. Discover what both of you really need and learn how to strengthen your bond",
+        "We’ve got all the intel on your relationships with friends, romantic partners and crusher. Discover what both of you really need and learn how to strengthen your bond.",
     },
     {
-      title: "Test compatibiluty in love and friendship",
+      title: "Get personalized synastry charts",
       img: love,
       content:
-        "We’ve got all the intel on your relationships with friends, romantic partners and crusher. Discover what both of you really need and learn how to strengthen your bond",
+        "Synastry is the process of comparing your birth charts. We check the positions of the planets, analyze what this means, and explain how you’ll connect.",
     },
     {
-      title: "Test compatibiluty in love and friendship",
+      title: "View algorithm-generated reports",
       img: bond,
       content:
-        "We’ve got all the intel on your relationships with friends, romantic partners and crusher. Discover what both of you really need and learn how to strengthen your bond",
+        "Our in-depth analysis can reveal whether you two will harmonize or clash when it comes to emotions, communication, interests, sex, love, intellect, and more.",
     },
   ];
   const handleAgreeClick = () => {

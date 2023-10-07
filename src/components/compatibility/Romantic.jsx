@@ -56,7 +56,6 @@ const Romantic = ({ match, user }) => {
     return (
       <Document>
         <Page size="A4" style={styles.page}>
-          <Text style={styles.title}>Love Report</Text>
           <Text style={styles.title}>Love Report:</Text>
           {match?.love_report.map((paragraph, index) => (
             <View key={index} style={styles.section}>

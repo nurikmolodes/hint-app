@@ -81,6 +81,11 @@
         font-style: normal;
         font-weight: 700;
         border: none;
+        &:hover {
+          // background: var(--Grad, linear-gradient(139deg, #404065 10.29%, #0085ff 94.53%));
+          background: var(--Blue, #5480F0);
+
+        }
       }
     }
   }

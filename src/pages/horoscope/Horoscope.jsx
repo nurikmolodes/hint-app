@@ -118,6 +118,7 @@ const Horoscope = () => {
         horoscope={horoscope}
         loadingHoroscope={loadingHoroscope}
         loadingMainInfo={loadingMainInfo}
+        activeItem={activeItem}
       />
     </div>
   );

@@ -22,14 +22,14 @@
   .message-content {
     h5 {
       color: var(--Heading, #25282f);
-      font-size: 15px;
+      font-size: 17px;
       font-style: normal;
       font-weight: 700;
       line-height: 150%; /* 21px */
     }
   }
   .message-timestamp {
-    color: var(--Body, #646670);
+    color: var(--Body, #222223);
     font-size: 11px;
     font-style: normal;
     font-weight: 400;
@@ -46,7 +46,7 @@
 
   .assistant {
     align-self: flex-start;
-    color: var(--Body, #646670);
+    color: var(--Body, #222223);
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
@@ -63,9 +63,8 @@
 
   .user {
     background: var(--Blue-2, #bfd2ff);
-    color: white;
     align-self: flex-end;
-    color: var(--Body, #646670);
+    color: var(--Body, #222223);
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
@@ -91,6 +90,9 @@
     border: none;
     border-radius: 16px;
     outline: none;
+    &::placeholder {
+      color: #222223;
+    }
   }
 
   .user-input button {

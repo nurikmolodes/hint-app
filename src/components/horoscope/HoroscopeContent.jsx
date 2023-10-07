@@ -2,7 +2,13 @@ import React from "react";
 import "../../styles/HoroscopeContent.scss";
 import { Card, CardContent, CardHeader, Skeleton } from "@mui/material";
 
-const HoroscopeContent = ({ horoscope, loadingHoroscope, loadingMainInfo, mainInfo }) => {
+const HoroscopeContent = ({
+  horoscope,
+  loadingHoroscope,
+  loadingMainInfo,
+  mainInfo,
+  activeItem,
+}) => {
   return (
     <div className="horoscope-content">
       {loadingMainInfo ? (
@@ -33,7 +39,7 @@ const HoroscopeContent = ({ horoscope, loadingHoroscope, loadingMainInfo, mainIn
           </Card>
         </div>
       ) : (
-        <article>
+        <article className={activeItem.value === "next" && "grey"}>
           {mainInfo?.report?.map((item, i) => (
             <div>
               <h3>{item?.title}</h3>

@@ -7,9 +7,22 @@ import shareImage from "../../assets/shareScore.svg";
 import basic from "../../assets/basic.svg";
 import emotion from "../../assets/emotion.svg";
 import "../../styles/Friendship.scss";
-import { Document, Page, Text, View, StyleSheet, PDFDownloadLink } from "@react-pdf/renderer";
+import img from "../../assets/grey.png";
+import {
+  Document,
+  Page,
+  Text,
+  View,
+  StyleSheet,
+  PDFDownloadLink,
+  BlobProvider,
+} from "@react-pdf/renderer";
 import Share from "./share/Share";
-import html2canvas from "html2canvas";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+import axios from "axios";
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const Friendship = ({ match, user }) => {
   const characteristics = [
@@ -56,8 +69,6 @@ const Friendship = ({ match, user }) => {
     return (
       <Document>
         <Page size="A4" style={styles.page}>
-          <Text style={styles.title}>Friendship</Text>
-
           <Text style={styles.title}>Friendship Report:</Text>
           {match.friendship_report.map((paragraph, index) => (
             <View key={index} style={styles.section}>
@@ -74,31 +85,59 @@ const Friendship = ({ match, user }) => {
       </Document>
     );
   };
+
   const [share, setShare] = useState(false);
+  const [accessToken, setAccessToken] = useState(
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJ0b2tlbklkIjoiMTcxZTk2MTEtNzkwYy00ZjU4LWI5ZmUtMmM2ODAyZDljYjg1IiwiaWF0IjoxNjk1NzkyNjQ2fQ.Xo9EZCWwa7S4iN-O5MupiKmQpMXtuH1JXGZ5kMf6fSE",
+  ); // Replace with your actual token
 
-  const componentRef = useRef(null);
+  const [pdfData, setPdfData] = useState("");
+  console.log(pdfData);
 
-  const captureAsPng = () => {
-    if (componentRef.current) {
-      html2canvas(componentRef.current).then((canvas) => {
-        // Convert canvas to a data URL
-        const image = canvas.toDataURL("image/png");
-
-        // Create a download link
-        const a = document.createElement("a");
-        a.href = image;
-        a.download = "component.png";
-
-        // Trigger a click event to download the image
-        a.click();
-      });
+  const sendPDF = async () => {
+    if (!pdfData) {
+      return;
     }
+
+    try {
+      // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint.
+      const apiEndpoint = "https://api.astropulse.app/api/share";
+      await axios.post(
+        apiEndpoint,
+        { image: pdfData },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+        },
+      );
+
+      alert("PDF sent successfully!");
+    } catch (error) {
+      console.error("Error sending PDF:", error);
+    }
+  };
+  const generate = () => {
+    // Replace this JSON data with your actual data.
+    const jsonData = {
+      content: [
+        { text: "Hello, World!", fontSize: 16, bold: true },
+        { text: "This is a PDF generated from JSON data in React." },
+      ],
+    };
+
+    const pdfDoc = pdfMake.createPdf(jsonData);
+
+    pdfDoc.getBase64((data) => {
+      setPdfData("data:application/pdf;base64," + data);
+    });
   };
 
   return (
     <div className="friendship">
       <div className="match">
-        <div className="users" ref={componentRef}>
+        <div className="users">
           <div className="user">
             <img src={daniel} />
             <span>{user?.info?.name}</span>
@@ -116,8 +155,15 @@ const Friendship = ({ match, user }) => {
             <span>{match?.partnerName}</span>
           </div>
         </div>
-        <div className="share" onClick={captureAsPng}>
-          <img src={shareImage} onClick={() => setShare(!share)} />
+        <div className="share">
+          <img
+            src={shareImage}
+            onClick={() => {
+              generate();
+              setShare(!share);
+              sendPDF();
+            }}
+          />
           {share && <Share description={"The results of a Friendship report"} match={match} />}
         </div>
       </div>
