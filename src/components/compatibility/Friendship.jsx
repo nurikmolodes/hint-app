@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import lora from "../../assets/lora.svg";
 import daniel from "../../assets/daniel.svg";
@@ -21,6 +21,7 @@ import Share from "./share/Share";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import axios from "axios";
+import html2canvas from "html2canvas";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -85,58 +86,87 @@ const Friendship = ({ match, user }) => {
       </Document>
     );
   };
-
+  const [link, setLink] = useState("");
+  console.log(link);
   const [share, setShare] = useState(false);
   const [accessToken, setAccessToken] = useState(
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJ0b2tlbklkIjoiMTcxZTk2MTEtNzkwYy00ZjU4LWI5ZmUtMmM2ODAyZDljYjg1IiwiaWF0IjoxNjk1NzkyNjQ2fQ.Xo9EZCWwa7S4iN-O5MupiKmQpMXtuH1JXGZ5kMf6fSE",
   ); // Replace with your actual token
-
+  const [blob, setBlob] = useState(null);
+  console.log(blob);
   const [pdfData, setPdfData] = useState("");
-  console.log(pdfData);
 
+  const base64Decoder = async () => {
+    try {
+      const response = await fetch(pdfData);
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+
+      const blobData = await response.blob();
+      setBlob(blobData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const componentRef = useRef(null);
+  // const generate = () => {
+  //   // Replace this JSON data with your actual data.
+  //   const jsonData = {
+  //     content: [
+  //       { text: "Hello, World!", fontSize: 16, bold: true },
+  //       { text: "This is a PDF generated from JSON data in React." },
+  //     ],
+  //   };
+
+  //   const pdfDoc = pdfMake.createPdf(jsonData);
+
+  //   pdfDoc.getBase64((data) => {
+  //     setPdfData("data:application/pdf;base64," + data);
+  //   });
+  // };
+  const generate = () => {
+    if (componentRef.current) {
+      html2canvas(componentRef.current).then((canvas) => {
+        // Convert canvas to a data URL
+        const image = canvas.toDataURL("image/png");
+        setPdfData(image);
+      });
+    }
+  };
   const sendPDF = async () => {
     if (!pdfData) {
       return;
     }
 
     try {
-      // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint.
       const apiEndpoint = "https://api.astropulse.app/api/share";
-      await axios.post(
+      const response = await axios.post(
         apiEndpoint,
-        { image: pdfData },
+        { image: blob },
         {
           headers: {
+            "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "application/json",
           },
         },
       );
-
-      alert("PDF sent successfully!");
+      setLink(response.data?.publicUrl);
     } catch (error) {
       console.error("Error sending PDF:", error);
     }
   };
-  const generate = () => {
-    // Replace this JSON data with your actual data.
-    const jsonData = {
-      content: [
-        { text: "Hello, World!", fontSize: 16, bold: true },
-        { text: "This is a PDF generated from JSON data in React." },
-      ],
-    };
-
-    const pdfDoc = pdfMake.createPdf(jsonData);
-
-    pdfDoc.getBase64((data) => {
-      setPdfData("data:application/pdf;base64," + data);
-    });
-  };
+  useEffect(() => {
+    base64Decoder(pdfData);
+    generate();
+    sendPDF();
+  }, [pdfData]);
 
   return (
     <div className="friendship">
-      <div className="match">
+      <div className="match" ref={componentRef}>
+        {/* <input type="file" onChange={(e) => setBlob(e.target.files[0])} /> */}
         <div className="users">
           <div className="user">
             <img src={daniel} />
@@ -159,12 +189,13 @@ const Friendship = ({ match, user }) => {
           <img
             src={shareImage}
             onClick={() => {
-              generate();
-              setShare(!share);
               sendPDF();
+              setShare(!share);
             }}
           />
-          {share && <Share description={"The results of a Friendship report"} match={match} />}
+          {share && (
+            <Share description={"The results of a Friendship report"} match={match} link={link} />
+          )}
         </div>
       </div>
       <div className="characteristics">

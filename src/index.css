@@ -12,3 +12,6 @@
 body {
   font-family: 'CustomFont', sans-serif;
 }
+button {
+  cursor: pointer;
+}
