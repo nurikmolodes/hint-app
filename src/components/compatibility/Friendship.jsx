@@ -7,23 +7,10 @@ import shareImage from "../../assets/shareScore.svg";
 import basic from "../../assets/basic.svg";
 import emotion from "../../assets/emotion.svg";
 import "../../styles/Friendship.scss";
-import img from "../../assets/grey.png";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  PDFDownloadLink,
-  BlobProvider,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, PDFDownloadLink } from "@react-pdf/renderer";
 import Share from "./share/Share";
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
 import axios from "axios";
 import html2canvas from "html2canvas";
-
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const Friendship = ({ match, user }) => {
   const characteristics = [
@@ -111,21 +98,7 @@ const Friendship = ({ match, user }) => {
   };
 
   const componentRef = useRef(null);
-  // const generate = () => {
-  //   // Replace this JSON data with your actual data.
-  //   const jsonData = {
-  //     content: [
-  //       { text: "Hello, World!", fontSize: 16, bold: true },
-  //       { text: "This is a PDF generated from JSON data in React." },
-  //     ],
-  //   };
 
-  //   const pdfDoc = pdfMake.createPdf(jsonData);
-
-  //   pdfDoc.getBase64((data) => {
-  //     setPdfData("data:application/pdf;base64," + data);
-  //   });
-  // };
   const generate = () => {
     if (componentRef.current) {
       html2canvas(componentRef.current).then((canvas) => {
