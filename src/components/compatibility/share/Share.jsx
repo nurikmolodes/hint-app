@@ -24,7 +24,7 @@ function Share({ description, link }) {
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
             y="0px"
-            style={{ width: 30 }}
+            style={{ width: 40 }}
             viewBox="0 0 48 48">
             <path fill="#29b6f6" d="M24 4A20 20 0 1 0 24 44A20 20 0 1 0 24 4Z"></path>
             <path
@@ -46,7 +46,7 @@ function Share({ description, link }) {
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
             y="0px"
-            style={{ width: 30 }}
+            style={{ width: 40 }}
             viewBox="0 0 48 48">
             <path
               fill="#fff"
@@ -73,7 +73,7 @@ function Share({ description, link }) {
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
             y="0px"
-            style={{ width: 30 }}
+            style={{ width: 40 }}
             viewBox="0 0 48 48">
             <path
               fill="#3F51B5"
@@ -92,7 +92,7 @@ function Share({ description, link }) {
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
             y="0px"
-            style={{ width: 30 }}
+            style={{ width: 40 }}
             viewBox="0 0 48 48">
             <path
               fill="#03A9F4"
@@ -111,7 +111,7 @@ function Share({ description, link }) {
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
             y="0px"
-            style={{ width: 30 }}
+            style={{ width: 40 }}
             viewBox="0 0 48 48">
             <path fill="#d32f2f" d="M24,4C13,4,4,13,4,24s9,20,20,20s20-9,20-20S35,4,24,4z"></path>
             <path
@@ -127,7 +127,7 @@ function Share({ description, link }) {
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
             y="0px"
-            style={{ width: 30 }}
+            style={{ width: 40 }}
             viewBox="0 0 48 48">
             <path
               fill="#0288D1"
@@ -149,7 +149,7 @@ function Share({ description, link }) {
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
             y="0px"
-            style={{ width: 30 }}
+            style={{ width: 40 }}
             viewBox="0 0 48 48">
             <path
               fill="#4caf50"
