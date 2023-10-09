@@ -29,7 +29,7 @@ const Romantic = ({ match, user }) => {
   const navigate = useNavigate();
 
   const navigateToAnotherPage = (id) => {
-    navigate(`/${id}`);
+    navigate(`/resultsCompatibility/${id}`);
   };
 
   const styles = StyleSheet.create({

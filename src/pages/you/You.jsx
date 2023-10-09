@@ -1,16 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import "./You.scss";
 import userAccount from "../../assets/userAccount.svg";
 import palm from "../../assets/palm.svg";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
-const You = () => {
+const You = ({ setResultsPalm }) => {
+  const navigate = useNavigate();
+  const [palmFile, setPalmFile] = useState(null);
+  const sendPalmPhoto = (e) => {
+    const file = e.target.files[0];
+    setPalmFile(file);
+    if (file) {
+      const response = axios
+        .post(
+          "https://api.astropulse.app/api/read-palm",
+          { image: file },
+          {
+            headers: {
+              Authorization:
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJ0b2tlbklkIjoiMTcxZTk2MTEtNzkwYy00ZjU4LWI5ZmUtMmM2ODAyZDljYjg1IiwiaWF0IjoxNjk1NzkyNjQ2fQ.Xo9EZCWwa7S4iN-O5MupiKmQpMXtuH1JXGZ5kMf6fSE",
+              "Content-Type": "multipart/form-data", // Important for file uploads
+            },
+          },
+        )
+        .then((response) => {
+          setResultsPalm(response.data);
+          navigate("/palmresults");
+        })
+        .catch((error) => {
+          // Handle errors here
+          console.error("File upload failed", error);
+        });
+    }
+  };
   return (
     <div className="you">
       <header>
         <nav>
           <section>
             <span>You</span>
-            <img src={userAccount} />
+            <Link to={"/account"}>
+              <img src={userAccount} />
+            </Link>
           </section>
           <p>Born on December 22, 1994 at 12:00 PM.</p>
         </nav>
@@ -73,11 +105,20 @@ const You = () => {
       </div>
       <div className="your-palmistry">
         <span>Your Palmistry</span>
-        <div className="block">
-          <img src={palm} />
-          <span>Get Your Palmistry Reading</span>
-          <p>Find your happiness with highly-personalized predictions</p>
-        </div>
+        <input
+          type="file"
+          id="fileInput"
+          name="fileInput"
+          onChange={(e) => sendPalmPhoto(e)}
+          key={palmFile ? palmFile.name : ""}
+        />
+        <form>
+          <label className="block" htmlFor="fileInput">
+            <img src={palm} />
+            <span>Get Your Palmistry Reading</span>
+            <p>Find your happiness with highly-personalized predictions</p>
+          </label>
+        </form>
       </div>
     </div>
   );

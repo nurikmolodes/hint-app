@@ -9,13 +9,18 @@ import AddFriend from "./pages/compatibility/addFriend/AddFriend";
 import ResultsCompatibilty from "./pages/compatibility/resultsCompatibilty/ResultsCompatibility";
 import { useEffect, useState } from "react";
 import DetailCharacteristic from "./pages/compatibility/detailCharacteristisc/DetailCharacteristic";
-import axios from "axios";
+import PalmResults from "./pages/you/palmResults/PalmResults";
+import Account from "./pages/you/account/Account";
 
 function App() {
+  const [resultsPalm, setResultsPalm] = useState(null);
+  const getThePalm = (data) => {
+    setResultsPalm(data);
+  };
   // Check if the current pathname is in the navbarRoutes array
   const navigate = useNavigate();
   const location = useLocation();
-  const footerRoutes = ["/", "/compatibility", "/horoscope", "/you", "/guidance"];
+  const footerRoutes = ["/", "/compatibility", "/horoscope", "/you", "/guidance", "/palmresults"];
   const shouldDisplayNavbar = footerRoutes.includes(location.pathname);
   const [match, setMatch] = useState([]);
   const getTheResultsCompatibility = (data) => {
@@ -37,7 +42,7 @@ function App() {
     },
     {
       path: "/you",
-      component: <You />,
+      component: <You setResultsPalm={setResultsPalm} />,
       label: "You",
     },
     {
@@ -56,9 +61,19 @@ function App() {
       label: "Results Compatibilty",
     },
     {
-      path: "/:CharacteristicId",
+      path: "/resultsCompatibility/:CharacteristicId",
       component: <DetailCharacteristic match={match} />,
       label: "Characteristic",
+    },
+    {
+      path: "/palmresults",
+      component: <PalmResults resultsPalm={resultsPalm} />,
+      label: "Palm Results",
+    },
+    {
+      path: "/account",
+      component: <Account />,
+      label: "Account",
     },
   ];
   useEffect(() => {
