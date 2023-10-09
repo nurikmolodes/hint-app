@@ -1,5 +1,186 @@
 .you {
   display: flex;
+  flex-direction: column;
   align-items: flex-end;
-  flex-grow: 1; /* Allow content to expand and push the footer to the bottom */
+  margin: 15px;
+  header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+    nav {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      section {
+        display: flex;
+        justify-content: space-between;
+        span {
+          color: var(--Heading, #25282f);
+          font-size: 30px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+          letter-spacing: -0.408px;
+        }
+      }
+      p {
+        color: #646670;
+        /* body 14 */
+        font-family: Trebuchet MS;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 150%; /* 21px */
+      }
+      span {
+        color: var(--Heading, #25282f);
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: -0.408px;
+      }
+    }
+  }
+  .core-personality {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    div {
+      height: 200px;
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+      @media (max-width: 446px) {
+        height: 150px;
+      }
+    }
+    .sun {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+      @media (max-width: 446px) {
+        gap: 20px;
+      }
+      .img {
+        border-radius: 16px;
+        background: url("../../assets/sun.svg");
+        background-repeat: no-repeat;
+        background-position: top;
+        position: relative;
+        background-size: cover;
+        height: 137px;
+        width: 100%;
+        @media (max-width: 446px) {
+          height: 75px;
+        }
+      }
+      .text {
+        padding-left: 15px;
+        @media (max-width: 446px) {
+          padding-bottom: 10px;
+        }
+        span {
+          color: var(--Orange, #e48d21);
+          font-size: 19px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 150%; /* 24px */
+        }
+        p {
+          color: #000;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 150%; /* 18px */
+        }
+      }
+    }
+    .moon {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+      @media (max-width: 446px) {
+        gap: 20px;
+      }
+      .img {
+        border-radius: 16px;
+        background: url("../../assets/moon.svg");
+        background-repeat: no-repeat;
+        background-position: top;
+        position: relative;
+        background-size: cover;
+        height: 137px;
+        width: 100%;
+        @media (max-width: 446px) {
+          height: 75px;
+        }
+      }
+      .text {
+        padding-left: 15px;
+        @media (max-width: 446px) {
+          padding-bottom: 10px;
+        }
+        span {
+          color: var(--Orange, #e48d21);
+          font-size: 19px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 150%; /* 24px */
+        }
+        p {
+          color: #000;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 150%; /* 18px */
+        }
+      }
+    }
+    .ricing-sign {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+      @media (max-width: 446px) {
+        gap: 20px;
+      }
+      .img {
+        border-radius: 16px;
+        background: url("../../assets/ricing-sign.svg");
+        background-repeat: no-repeat;
+        background-position: top;
+        position: relative;
+        background-size: cover;
+        height: 137px;
+        width: 100%;
+        @media (max-width: 446px) {
+          height: 75px;
+        }
+      }
+      .text {
+        padding-left: 15px;
+        @media (max-width: 446px) {
+          padding-bottom: 10px;
+        }
+        span {
+          color: var(--Orange, #e48d21);
+          font-size: 19px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 150%; /* 24px */
+        }
+        p {
+          color: #000;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 150%; /* 18px */
+        }
+      }
+    }
+  }
 }
