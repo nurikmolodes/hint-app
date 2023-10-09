@@ -325,4 +325,50 @@
       }
     }
   }
+  .your-palmistry {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+    span {
+      color: var(--Heading, #25282f);
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: -0.408px;
+    }
+    .block {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+      margin-top: 20px;
+      img {
+        margin-top: 20px;
+      }
+      span {
+        color: var(--Heading, #25282f);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 150%; /* 24px */
+        margin-top: 20px;
+      }
+      p {
+        margin-top: 10px;
+        margin-bottom: 25px;
+        color: var(--Body, #646670);
+        text-align: center;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 150%; /* 21px */
+      }
+    }
+  }
 }

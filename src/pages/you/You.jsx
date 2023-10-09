@@ -1,6 +1,7 @@
 import React from "react";
 import "./You.scss";
 import userAccount from "../../assets/userAccount.svg";
+import palm from "../../assets/palm.svg";
 
 const You = () => {
   return (
@@ -41,7 +42,7 @@ const You = () => {
           </section>
         </div>
       </div>
-      <header style={{ marginTop: '20px' }}>
+      <header style={{ marginTop: "20px" }}>
         <nav>
           <span>A little more about you</span>
           <p>Other important planetary placements.</p>
@@ -68,6 +69,14 @@ const You = () => {
             <span>Sun</span>
             <p>Your Fortune</p>
           </section>
+        </div>
+      </div>
+      <div className="your-palmistry">
+        <span>Your Palmistry</span>
+        <div className="block">
+          <img src={palm} />
+          <span>Get Your Palmistry Reading</span>
+          <p>Find your happiness with highly-personalized predictions</p>
         </div>
       </div>
     </div>
