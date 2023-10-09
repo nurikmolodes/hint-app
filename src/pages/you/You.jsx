@@ -41,6 +41,35 @@ const You = () => {
           </section>
         </div>
       </div>
+      <header style={{ marginTop: '20px' }}>
+        <nav>
+          <span>A little more about you</span>
+          <p>Other important planetary placements.</p>
+        </nav>
+      </header>
+      <div className="about-you">
+        <div className="sun">
+          <section className="img"></section>
+          <section className="text">
+            <span>Sun</span>
+            <p>Your interaction</p>
+          </section>
+        </div>
+        <div className="moon">
+          <section className="img"></section>
+          <section className="text">
+            <span>Moon</span>
+            <p>Your aspirations</p>
+          </section>
+        </div>
+        <div className="ricing-sign">
+          <section className="img"></section>
+          <section className="text">
+            <span>Sun</span>
+            <p>Your Fortune</p>
+          </section>
+        </div>
+      </div>
     </div>
   );
 };

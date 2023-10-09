@@ -44,6 +44,7 @@
     }
   }
   .core-personality {
+    margin-top: 20px;
     display: flex;
     width: 100%;
     gap: 10px;
@@ -125,7 +126,7 @@
           padding-bottom: 10px;
         }
         span {
-          color: var(--Orange, #e48d21);
+          color: var(--Blue, #5480f0);
           font-size: 19px;
           font-style: normal;
           font-weight: 700;
@@ -167,7 +168,148 @@
           padding-bottom: 10px;
         }
         span {
+          color: #99e1ef;
+          font-size: 19px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 150%; /* 24px */
+        }
+        p {
+          color: #000;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 150%; /* 18px */
+        }
+      }
+    }
+  }
+  .about-you {
+    margin-top: 20px;
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    div {
+      height: 200px;
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+      @media (max-width: 446px) {
+        height: 150px;
+      }
+    }
+    .sun {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+      @media (max-width: 446px) {
+        gap: 20px;
+      }
+      .img {
+        border-radius: 16px;
+        background: url("../../assets/mercury.svg");
+        background-repeat: no-repeat;
+        background-position: top;
+        position: relative;
+        background-size: cover;
+        height: 137px;
+        width: 100%;
+        @media (max-width: 446px) {
+          height: 75px;
+        }
+      }
+      .text {
+        padding-left: 15px;
+        @media (max-width: 446px) {
+          padding-bottom: 10px;
+        }
+        span {
           color: var(--Orange, #e48d21);
+          font-size: 19px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 150%; /* 24px */
+        }
+        p {
+          color: #000;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 150%; /* 18px */
+        }
+      }
+    }
+    .moon {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+      @media (max-width: 446px) {
+        gap: 20px;
+      }
+      .img {
+        border-radius: 16px;
+        background: url("../../assets/jupiter.svg");
+        background-repeat: no-repeat;
+        background-position: top;
+        position: relative;
+        background-size: cover;
+        height: 137px;
+        width: 100%;
+        @media (max-width: 446px) {
+          height: 75px;
+        }
+      }
+      .text {
+        padding-left: 15px;
+        @media (max-width: 446px) {
+          padding-bottom: 10px;
+        }
+        span {
+          color: var(--Blue, #5480f0);
+          font-size: 19px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 150%; /* 24px */
+        }
+        p {
+          color: #000;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 150%; /* 18px */
+        }
+      }
+    }
+    .ricing-sign {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+      @media (max-width: 446px) {
+        gap: 20px;
+      }
+      .img {
+        border-radius: 16px;
+        background: url("../../assets/midheaven.svg");
+        background-repeat: no-repeat;
+        background-position: top;
+        position: relative;
+        background-size: cover;
+        height: 137px;
+        width: 100%;
+        @media (max-width: 446px) {
+          height: 75px;
+        }
+      }
+      .text {
+        padding-left: 15px;
+        @media (max-width: 446px) {
+          padding-bottom: 10px;
+        }
+        span {
+          color: #99e1ef;
           font-size: 19px;
           font-style: normal;
           font-weight: 700;
