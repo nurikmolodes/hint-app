@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import DetailCharacteristic from "./pages/compatibility/detailCharacteristisc/DetailCharacteristic";
 import PalmResults from "./pages/you/palmResults/PalmResults";
 import Account from "./pages/you/account/Account";
+import UserUpdate from "./pages/you/userUpdate/UserUpdate";
 
 function App() {
   const [resultsPalm, setResultsPalm] = useState(null);
@@ -74,6 +75,11 @@ function App() {
       path: "/account",
       component: <Account />,
       label: "Account",
+    },
+    {
+      path: "/userupdate",
+      component: <UserUpdate />,
+      label: "User Update",
     },
   ];
   useEffect(() => {

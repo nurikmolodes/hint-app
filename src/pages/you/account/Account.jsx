@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "./Account.scss";
 import back from "../../../assets/back.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import userIcon from "../../../assets/userIcon.svg";
 import openBlock from "../../../assets/open.svg";
 
 const Account = () => {
+  const navigate = useNavigate();
   const data = [
     {
       title: "Account management",
@@ -68,13 +69,15 @@ const Account = () => {
           </Link>
         </div>
       </header>
-      <section className="user">
-        <div className="left">
-          <img src={userIcon} />
-          <span>Lora</span>
-        </div>
-        <img src={openBlock} />
-      </section>
+      <Link to={"/userupdate"}>
+        <section className="user">
+          <div className="left">
+            <img src={userIcon} />
+            <span>Lora</span>
+          </div>
+          <img src={openBlock} />
+        </section>
+      </Link>
       <section className="first">
         <div className="accordion">
           {data.map((item, index) => (
