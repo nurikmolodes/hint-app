@@ -4,14 +4,19 @@ import userAccount from "../../assets/userAccount.svg";
 import palm from "../../assets/palm.svg";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const You = ({ setResultsPalm }) => {
   const navigate = useNavigate();
   const [palmFile, setPalmFile] = useState(null);
+  const [loading, setLoading] = useState(false);
+  console.log(loading);
   const sendPalmPhoto = (e) => {
     const file = e.target.files[0];
     setPalmFile(file);
     if (file) {
+      setLoading(true);
       const response = axios
         .post(
           "https://api.astropulse.app/api/read-palm",
@@ -26,11 +31,13 @@ const You = ({ setResultsPalm }) => {
         )
         .then((response) => {
           setResultsPalm(response.data);
+          setLoading(false);
           navigate("/palmresults");
         })
         .catch((error) => {
-          // Handle errors here
           console.error("File upload failed", error);
+          setLoading(false);
+          alert("Please upload your palm hand");
         });
     }
   };
@@ -105,20 +112,28 @@ const You = ({ setResultsPalm }) => {
       </div>
       <div className="your-palmistry">
         <span>Your Palmistry</span>
-        <input
-          type="file"
-          id="fileInput"
-          name="fileInput"
-          onChange={(e) => sendPalmPhoto(e)}
-          key={palmFile ? palmFile.name : ""}
-        />
-        <form>
-          <label className="block" htmlFor="fileInput">
-            <img src={palm} />
-            <span>Get Your Palmistry Reading</span>
-            <p>Find your happiness with highly-personalized predictions</p>
-          </label>
-        </form>
+        {loading ? (
+          <Box sx={{ width: "100%", height: "200px" }}>
+            <LinearProgress sx={{ marginTop: "100px" }} />
+          </Box>
+        ) : (
+          <>
+            <input
+              type="file"
+              id="fileInput"
+              name="fileInput"
+              onChange={(e) => sendPalmPhoto(e)}
+              key={palmFile ? palmFile.name : ""}
+            />
+            <form>
+              <label className="block" htmlFor="fileInput">
+                <img src={palm} />
+                <span>Get Your Palmistry Reading</span>
+                <p>Find your happiness with highly-personalized predictions</p>
+              </label>
+            </form>
+          </>
+        )}
       </div>
     </div>
   );
