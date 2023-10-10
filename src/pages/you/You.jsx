@@ -37,7 +37,7 @@ const You = ({ setResultsPalm }) => {
         .catch((error) => {
           console.error("File upload failed", error);
           setLoading(false);
-          alert("Please upload your palm hand");
+          alert("Please upload your palm hand and maximum image size 500kb");
         });
     }
   };
