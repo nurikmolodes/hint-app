@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./YouDetail.scss";
-import { Link, useNavigate, useParams } from "react-router-dom";
 import back from "../../../assets/back.svg";
 import like from "../../../assets/like.svg";
 import dislike from "../../../assets/dislike.svg";
@@ -9,6 +8,7 @@ import mantra from "../../../assets/mantra.svg";
 import strangeFigure from "../../../assets/strangeFigure.svg";
 import axios from "axios";
 import { Card, CardContent, CardHeader, Skeleton } from "@mui/material";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const YouDetail = () => {
   const [data, setData] = useState([]);
