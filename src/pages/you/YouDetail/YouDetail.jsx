@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./YouDetail.scss";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import back from "../../../assets/back.svg";
@@ -7,11 +7,44 @@ import dislike from "../../../assets/dislike.svg";
 import sign from "../../../assets/sign.svg";
 import mantra from "../../../assets/mantra.svg";
 import strangeFigure from "../../../assets/strangeFigure.svg";
+import axios from "axios";
+import { Card, CardContent, CardHeader, Skeleton } from "@mui/material";
 
 const YouDetail = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { name } = useParams();
+  const getTheDescription = async () => {
+    setLoading(true);
+    const formdata = {
+      dateOfBirth: "1990-02-10",
+      timeOfBirth: "10:20",
+      lat: "7.57944",
+      lon: "-8.53778",
+    };
+    try {
+      const response = await axios.post(
+        `https://api.astropulse.app/api/astro/planet_sign_report/${name}`,
+        formdata,
+        {
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJ0b2tlbklkIjoiMTcxZTk2MTEtNzkwYy00ZjU4LWI5ZmUtMmM2ODAyZDljYjg1IiwiaWF0IjoxNjk1NzkyNjQ2fQ.Xo9EZCWwa7S4iN-O5MupiKmQpMXtuH1JXGZ5kMf6fSE",
+          },
+        },
+      );
+      setData(response.data);
+      setLoading(false);
+      // Handle the successful response here
+      console.log("Successfully", response.data);
+    } catch (error) {
+      // Handle errors here
+      console.error("Failed", error);
+    }
+  };
   useEffect(() => {
+    getTheDescription();
     window.scrollTo(0, 0);
   }, []);
   return (
@@ -27,78 +60,103 @@ const YouDetail = () => {
       <div className="title">
         <span>How you see yourself</span>
       </div>
-      <div className={`upper-container ${name}`}>
-        <div className="content">
-          <div className="upper">
-            <div className="like">
-              <section>
-                <img src={like} />
-                <span>Like</span>
-              </section>
-              <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. In, a excepturi voluptatem
-                animi accusantium quis asperiores dolorem? Voluptates incidunt earum temporibus,
-                iusto vero veniam ullam in, adipisci dignissimos dolores cum.
-              </p>
-            </div>
-            <div className="dislike">
-              <section>
-                <img src={dislike} />
-                <span>Dislike</span>
-              </section>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam autem libero
-                fugiat quod earum aliquid aspernatur eveniet enim, rerum at doloribus tempora eum,
-                ab perspiciatis assumenda incidunt? A, laborum culpa.
-              </p>
-            </div>
-          </div>
-          <hr />
-          <div className="below">
-            <div className="sign">
-              <section>
-                <img src={sign} />
-                <span>Сelebrities under the sign</span>
-              </section>
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores asperiores alias
-                quae necessitatibus rem id inventore consequuntur, voluptatem, sunt, mollitia
-                repudiandae! Nam neque ipsa voluptas quae libero rerum repudiandae distinctio!
-              </p>
-            </div>
-            <div className="mantra">
-              <section>
-                <img src={mantra} />
-                <span>Your mantra</span>
-              </section>
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsam dolorum nulla
-                voluptatum. Distinctio quae deserunt asperiores temporibus! Corporis inventore vitae
-                aperiam, sit a facilis nisi! Mollitia perferendis consequuntur dolor ullam.
-              </p>
-            </div>
-          </div>
+      {loading ? (
+        <div className="loading-content">
+          <Card width="100%" sx={{ boxShadow: "none" }}>
+            <CardContent width="100%">
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} width="100%" />
+            </CardContent>
+          </Card>
         </div>
-        <img className="figure" src={strangeFigure} />
-      </div>
-      <article>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur laborum excepturi
-          porro odio incidunt sint voluptates inventore unde voluptatem delectus accusantium
-          repellat, praesentium nisi, odit illum ipsam minus sed culpa. Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Voluptatibus id voluptatem qui quos iure fugiat quod
-          inventore error iusto laborum est ipsam similique voluptates minus quibusdam sapiente, vel
-          aliquid. Molestias!
-        </p>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur laborum excepturi
-          porro odio incidunt sint voluptates inventore unde voluptatem delectus accusantium
-          repellat, praesentium nisi, odit illum ipsam minus sed culpa. Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Voluptatibus id voluptatem qui quos iure fugiat quod
-          inventore error iusto laborum est ipsam similique voluptates minus quibusdam sapiente, vel
-          aliquid. Molestias!
-        </p>
-      </article>
+      ) : (
+        <div className={`upper-container ${name}`}>
+          <div className="content">
+            <div className="upper">
+              <div className="like">
+                <section>
+                  <img src={like} />
+                  <span>Like</span>
+                </section>
+                <p>{data?.report}</p>
+              </div>
+              <div className="dislike">
+                <section>
+                  <img src={dislike} />
+                  <span>Dislike</span>
+                </section>
+                <p>{data?.report}</p>
+              </div>
+            </div>
+            <hr />
+            <div className="below">
+              <div className="sign">
+                <section>
+                  <img src={sign} />
+                  <span>Сelebrities under the sign</span>
+                </section>
+                <p>{data?.report}</p>
+              </div>
+              <div className="mantra">
+                <section>
+                  <img src={mantra} />
+                  <span>Your mantra</span>
+                </section>
+                <p>{data?.report}</p>
+              </div>
+            </div>
+          </div>
+          <img className="figure" src={strangeFigure} />
+        </div>
+      )}
+      {loading ? (
+        <div className="loading-content">
+          <Card width="100%" sx={{ boxShadow: "none" }}>
+            <CardContent width="100%">
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} width="100%" />
+            </CardContent>
+          </Card>
+        </div>
+      ) : (
+        <article>
+          <p>{data?.report}</p>
+        </article>
+      )}
     </div>
   );
 };

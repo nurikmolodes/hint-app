@@ -59,21 +59,21 @@ const You = ({ setResultsPalm }) => {
         </nav>
       </header>
       <div className="core-personality">
-        <div className="sun" onClick={() => navigate("/you/sun")}>
+        <div className="sun" onClick={() => navigate("/you/Sun")}>
           <section className="img"></section>
           <section className="text">
             <span>Sun</span>
             <p>Your identity</p>
           </section>
         </div>
-        <div className="moon" onClick={() => navigate("/you/moon")}>
+        <div className="moon" onClick={() => navigate("/you/Moon")}>
           <section className="img"></section>
           <section className="text">
             <span>Moon</span>
             <p>Your emotions</p>
           </section>
         </div>
-        <div className="ricing-sign" onClick={() => navigate("/you/ricing-sun")}>
+        <div className="ricing-sign" onClick={() => navigate("/you/Venus")}>
           <section className="img"></section>
           <section className="text">
             <span>Ricing sign</span>
@@ -88,21 +88,21 @@ const You = ({ setResultsPalm }) => {
         </nav>
       </header>
       <div className="about-you">
-        <div className="sun" onClick={() => navigate("/you/mercury")}>
+        <div className="sun" onClick={() => navigate("/you/Mercury")}>
           <section className="img"></section>
           <section className="text">
             <span>Mercury</span>
             <p>Your interaction</p>
           </section>
         </div>
-        <div className="moon" onClick={() => navigate("/you/jupiter")}>
+        <div className="moon" onClick={() => navigate("/you/Jupiter")}>
           <section className="img"></section>
           <section className="text">
             <span>Jupiter</span>
             <p>Your aspirations</p>
           </section>
         </div>
-        <div className="ricing-sign" onClick={() => navigate("/you/midheaven")}>
+        <div className="ricing-sign" onClick={() => navigate("/you/Mars")}>
           <section className="img"></section>
           <section className="text">
             <span>MidHeaven</span>
