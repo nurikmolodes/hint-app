@@ -52,24 +52,24 @@ const You = ({ setResultsPalm }) => {
         </nav>
       </header>
       <div className="core-personality">
-        <div className="sun">
+        <div className="sun" onClick={() => navigate("/you/sun")}>
           <section className="img"></section>
           <section className="text">
             <span>Sun</span>
             <p>Your identity</p>
           </section>
         </div>
-        <div className="moon">
+        <div className="moon" onClick={() => navigate("/you/moon")}>
           <section className="img"></section>
           <section className="text">
             <span>Moon</span>
             <p>Your emotions</p>
           </section>
         </div>
-        <div className="ricing-sign">
+        <div className="ricing-sign" onClick={() => navigate("/you/ricing-sun")}>
           <section className="img"></section>
           <section className="text">
-            <span>Sun</span>
+            <span>Ricing sign</span>
             <p>Your image</p>
           </section>
         </div>
@@ -81,24 +81,24 @@ const You = ({ setResultsPalm }) => {
         </nav>
       </header>
       <div className="about-you">
-        <div className="sun">
+        <div className="sun" onClick={() => navigate("/you/mercury")}>
           <section className="img"></section>
           <section className="text">
-            <span>Sun</span>
+            <span>Mercury</span>
             <p>Your interaction</p>
           </section>
         </div>
-        <div className="moon">
+        <div className="moon" onClick={() => navigate("/you/jupiter")}>
           <section className="img"></section>
           <section className="text">
-            <span>Moon</span>
+            <span>Jupiter</span>
             <p>Your aspirations</p>
           </section>
         </div>
-        <div className="ricing-sign">
+        <div className="ricing-sign" onClick={() => navigate("/you/midheaven")}>
           <section className="img"></section>
           <section className="text">
-            <span>Sun</span>
+            <span>MidHeaven</span>
             <p>Your Fortune</p>
           </section>
         </div>

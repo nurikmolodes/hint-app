@@ -1,0 +1,193 @@
+.you-detail {
+  margin: 15px;
+  .title {
+    margin-top: 20px;
+    span {
+      color: var(--Heading, #25282f);
+      font-family: Trebuchet MS;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: -0.408px;
+    }
+  }
+  .sun {
+    background: url("../../../assets/sun.svg") !important;
+  }
+  .moon {
+    background: url("../../../assets/moon.svg") !important;
+  }
+  .ricing-sign {
+    background: url("../../../assets/ricing-sign.svg") !important;
+  }
+  .mercury {
+    background: url("../../../assets/mercury.svg") !important;
+  }
+  .jupiter {
+    background: url("../../../assets/jupiter.svg") !important;
+  }
+  .midheaven {
+    background: url("../../../assets/midheaven.svg") !important;
+  }
+  .upper-container {
+    position: relative;
+    background-repeat: no-repeat !important;
+    background-position: left;
+    margin-top: 20px;
+    width: 100%;
+    border-radius: 16px;
+    background: var(--White, #fff);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    width: 100%;
+    .content {
+      padding: 84px 21px;
+      width: 100%;
+      .upper {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        .like {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          section {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            span {
+              color: #000;
+              font-family: Trebuchet MS;
+              font-size: 15px;
+              font-style: normal;
+              font-weight: 700;
+              line-height: 150%; /* 21px */
+            }
+          }
+          p {
+            color: var(--Body, #646670);
+            font-family: Trebuchet MS;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%; /* 21px */
+          }
+        }
+        .dislike {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          section {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            span {
+              color: #000;
+              font-family: Trebuchet MS;
+              font-size: 15px;
+              font-style: normal;
+              font-weight: 700;
+              line-height: 150%; /* 21px */
+            }
+          }
+          p {
+            color: var(--Body, #646670);
+            font-family: Trebuchet MS;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%; /* 21px */
+          }
+        }
+      }
+      hr {
+        margin: 20px 0 !important;
+      }
+      .below {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        .sign {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          section {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            span {
+              color: #000;
+              font-family: Trebuchet MS;
+              font-size: 15px;
+              font-style: normal;
+              font-weight: 700;
+              line-height: 150%; /* 21px */
+              span {
+                color: #000;
+                font-family: Trebuchet MS;
+                font-size: 15px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 150%; /* 21px */
+              }
+            }
+          }
+          p {
+            color: var(--Body, #646670);
+            font-family: Trebuchet MS;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%; /* 21px */
+          }
+        }
+        .mantra {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          section {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            span {
+              color: #000;
+              font-family: Trebuchet MS;
+              font-size: 15px;
+              font-style: normal;
+              font-weight: 700;
+              line-height: 150%; /* 21px */
+            }
+          }
+          p {
+            color: var(--Body, #646670);
+            font-family: Trebuchet MS;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%; /* 21px */
+          }
+        }
+      }
+    }
+    .figure {
+      position: absolute;
+      bottom: 0;
+    }
+  }
+  article {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    p {
+      color: #646670;
+      font-family: Trebuchet MS;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%; /* 21px */
+    }
+  }
+}

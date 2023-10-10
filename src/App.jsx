@@ -12,6 +12,7 @@ import DetailCharacteristic from "./pages/compatibility/detailCharacteristisc/De
 import PalmResults from "./pages/you/palmResults/PalmResults";
 import Account from "./pages/you/account/Account";
 import UserUpdate from "./pages/you/userUpdate/UserUpdate";
+import YouDetail from "./pages/you/YouDetail/YouDetail";
 
 function App() {
   const [resultsPalm, setResultsPalm] = useState(null);
@@ -80,6 +81,11 @@ function App() {
       path: "/userupdate",
       component: <UserUpdate />,
       label: "User Update",
+    },
+    {
+      path: "/you/:name",
+      component: <YouDetail />,
+      label: "You Detail",
     },
   ];
   useEffect(() => {
