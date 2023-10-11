@@ -3,7 +3,7 @@ import "./Horoscope.scss";
 import HoroscopeContent from "../../components/horoscope/HoroscopeContent";
 import axios from "axios";
 
-const Horoscope = () => {
+const Horoscope = ({ user }) => {
   const [activeItem, setActiveItem] = useState({ id: 1, text: "Today", value: "daily" });
   console.log(activeItem);
 
@@ -22,7 +22,7 @@ const Horoscope = () => {
     }
   };
   // USER
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   const [horoscope, setHoroscope] = useState([]);
   const [mainInfo, setMainInfo] = useState([]);
   const [loadingHoroscope, setLoadingHoroscope] = useState(true);
@@ -31,23 +31,6 @@ const Horoscope = () => {
   const params = {
     email: "nurikgentle@gmail.com",
     password: "ND#3XAb",
-  };
-
-  const getUser = () => {
-    // Send a POST request using Axios
-    axios
-      .post(`https://api.astropulse.app/api/auth`, params, {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      })
-      .then((response) => {
-        console.log("Response:", response.data);
-        setUser(response.data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
   };
   const getHoroscope = async (active) => {
     try {
@@ -59,7 +42,7 @@ const Horoscope = () => {
         },
         {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJ0b2tlbklkIjoiMTcxZTk2MTEtNzkwYy00ZjU4LWI5ZmUtMmM2ODAyZDljYjg1IiwiaWF0IjoxNjk1NzkyNjQ2fQ.Xo9EZCWwa7S4iN-O5MupiKmQpMXtuH1JXGZ5kMf6fSE`,
+            Authorization: `Bearer ${user?.token}`,
           },
         },
       );
@@ -78,7 +61,7 @@ const Horoscope = () => {
         {},
         {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJ0b2tlbklkIjoiMTcxZTk2MTEtNzkwYy00ZjU4LWI5ZmUtMmM2ODAyZDljYjg1IiwiaWF0IjoxNjk1NzkyNjQ2fQ.Xo9EZCWwa7S4iN-O5MupiKmQpMXtuH1JXGZ5kMf6fSE`,
+            Authorization: `Bearer ${user?.token}`,
           },
         },
       );
@@ -90,13 +73,13 @@ const Horoscope = () => {
       console.error("Error:", error);
     }
   };
-  useEffect(() => {
-    getUser();
-  }, []);
+  // useEffect(() => {
+  //   getUser();
+  // }, []);
   useEffect(() => {
     getHoroscope(activeItem);
     getMainInfo();
-  }, [activeItem.value]);
+  }, [activeItem.value, user]);
   return (
     <div className="horoscope">
       <div className="greeting">

@@ -13,8 +13,18 @@ import PalmResults from "./pages/you/palmResults/PalmResults";
 import Account from "./pages/you/account/Account";
 import UserUpdate from "./pages/you/userUpdate/UserUpdate";
 import YouDetail from "./pages/you/YouDetail/YouDetail";
+import SignIn from "./pages/singin/SignIn";
 
 function App() {
+  const [user, setUser] = useState(null);
+  function getFromLocalStorage() {
+    const data = JSON.parse(localStorage.getItem("user"));
+    setUser(data);
+    console.log(user);
+  }
+  useEffect(() => {
+    getFromLocalStorage();
+  }, []);
   const [resultsPalm, setResultsPalm] = useState(null);
   const getThePalm = (data) => {
     setResultsPalm(data);
@@ -22,7 +32,7 @@ function App() {
   // Check if the current pathname is in the navbarRoutes array
   const navigate = useNavigate();
   const location = useLocation();
-  const footerRoutes = ["/", "/compatibility", "/horoscope", "/you", "/guidance", "/palmresults"];
+  const footerRoutes = ["/compatibility", "/horoscope", "/you", "/guidance", "/palmresults"];
   const shouldDisplayNavbar = footerRoutes.includes(location.pathname);
   const [match, setMatch] = useState([]);
   const getTheResultsCompatibility = (data) => {
@@ -33,13 +43,18 @@ function App() {
 
   const routes = [
     {
+      path: "/",
+      component: <SignIn />,
+      label: "Sign In",
+    },
+    {
       path: "/compatibility",
       component: <Compatibility />,
       label: "Compatibily",
     },
     {
       path: "/horoscope",
-      component: <Horoscope />,
+      component: <Horoscope user={user} />,
       label: "Horoscope",
     },
     {
@@ -88,11 +103,6 @@ function App() {
       label: "You Detail",
     },
   ];
-  useEffect(() => {
-    if (location.pathname === "/") {
-      navigate("/horoscope");
-    }
-  }, []);
   return (
     <div className="wrapper">
       <Routes>
