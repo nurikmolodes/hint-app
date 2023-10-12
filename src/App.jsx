@@ -59,12 +59,12 @@ function App() {
     },
     {
       path: "/you",
-      component: <You setResultsPalm={setResultsPalm} />,
+      component: <You setResultsPalm={setResultsPalm} user={user} />,
       label: "You",
     },
     {
       path: "/guidance",
-      component: <Guidance />,
+      component: <Guidance user={user} />,
       label: "Guidance",
     },
     {
@@ -74,7 +74,7 @@ function App() {
     },
     {
       path: "/resultsCompatibility",
-      component: <ResultsCompatibilty match={match} />,
+      component: <ResultsCompatibilty match={match} user={user} />,
       label: "Results Compatibilty",
     },
     {
@@ -89,12 +89,12 @@ function App() {
     },
     {
       path: "/account",
-      component: <Account />,
+      component: <Account user={user} />,
       label: "Account",
     },
     {
       path: "/userupdate",
-      component: <UserUpdate />,
+      component: <UserUpdate user={user} />,
       label: "User Update",
     },
     {

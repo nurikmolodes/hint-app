@@ -7,46 +7,19 @@ import notFound from "../../../assets/notFound.svg";
 import DateSelector from "../../../components/compatibility/dateSelector/DateSelector";
 import TimeSelector from "../../../components/compatibility/timeSelector/TimeSelector";
 
-const UserUpdate = () => {
-  // USER
-  const [user, setUser] = useState(null);
-
-  const data = {
-    email: "nurikgentle@gmail.com",
-    password: "ND#3XAb",
-  };
-
-  const getUser = () => {
-    // Send a POST request using Axios
-    axios
-      .post("https://api.astropulse.app/api/auth", data, {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      })
-      .then((response) => {
-        console.log("Response:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  };
-
+const UserUpdate = ({ user }) => {
   const navigate = useNavigate();
   // LOADING
   const [loadingSubmit, setLoadingSubmit] = useState(false);
   // FORM
   const [formData, setFormData] = useState({
-    name: "",
+    name: user?.info?.name,
     gender: "male", // Default gender selection
-    dateOfBirth: "1991-01-01",
+    dateOfBirth: user?.info?.birth_date,
     timeOfBirth: "00:00",
     placeOfBirth: "",
     unknownTimeOfBirth: false,
   });
-  useEffect(() => {
-    getUser();
-  }, []);
   //date
   const [showDate, setShowDate] = useState(false);
   const getDate = (date) => {
@@ -129,7 +102,7 @@ const UserUpdate = () => {
         params,
         {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJ0b2tlbklkIjoiMTcxZTk2MTEtNzkwYy00ZjU4LWI5ZmUtMmM2ODAyZDljYjg1IiwiaWF0IjoxNjk1NzkyNjQ2fQ.Xo9EZCWwa7S4iN-O5MupiKmQpMXtuH1JXGZ5kMf6fSE`,
+            Authorization: `Bearer ${user?.token}`,
           },
         },
       );
@@ -201,7 +174,7 @@ const UserUpdate = () => {
               <div className="name">
                 <label>Name</label>
                 <input
-                  placeholder='Name'
+                  placeholder="Name"
                   type="text"
                   name="name"
                   value={formData.name}

@@ -8,9 +8,8 @@ import InActiveRomantic from "../../../assets/inActiveRomantic.svg";
 import InActiveFriendship from "../../../assets/InActiveFriendship.svg";
 import Romantic from "../../../components/compatibility/Romantic";
 import Friendship from "../../../components/compatibility/Friendship";
-import axios from "axios";
 
-const ResultsCompatibility = ({ match }) => {
+const ResultsCompatibility = ({ match, user }) => {
   console.log(match);
   const navigate = useNavigate();
   const [options, setOptions] = useState([
@@ -39,34 +38,7 @@ const ResultsCompatibility = ({ match }) => {
     }));
     setOptions(updatedOptions);
   };
-  // USER
-  const [user, setUser] = useState(null);
 
-  const data = {
-    email: "nurikgentle@gmail.com",
-    password: "ND#3XAb",
-  };
-
-  const getUser = () => {
-    // Send a POST request using Axios
-    axios
-      .post("https://api.astropulse.app/api/auth", data, {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      })
-      .then((response) => {
-        console.log("Response:", response.data);
-        setUser(response.data)
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
   return (
     <div className="resultsCompatibility">
       <header>

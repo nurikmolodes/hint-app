@@ -2,10 +2,10 @@ import React from "react";
 import "./Guidance.scss";
 import Chat from "../../components/guidance/Chat";
 
-const Guidance = () => {
+const Guidance = ({ user }) => {
   return (
     <div className="guidance">
-      <Chat />
+      <Chat user={user} />
     </div>
   );
 };

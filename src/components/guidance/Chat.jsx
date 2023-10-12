@@ -4,13 +4,10 @@ import "../../styles/Chat.scss";
 import Send from "../../assets/send.svg";
 import avatar from "../../assets/avatar.svg";
 
-const Chat = () => {
+const Chat = ({ user }) => {
   const [messages, setMessages] = useState([]);
   console.log(messages);
   const [userMessage, setUserMessage] = useState("");
-  const [accessToken, setAccessToken] = useState(
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJ0b2tlbklkIjoiMTcxZTk2MTEtNzkwYy00ZjU4LWI5ZmUtMmM2ODAyZDljYjg1IiwiaWF0IjoxNjk1NzkyNjQ2fQ.Xo9EZCWwa7S4iN-O5MupiKmQpMXtuH1JXGZ5kMf6fSE",
-  ); // Replace with your actual token
 
   // Load chat history from sessionStorage when the component mounts
   useEffect(() => {
@@ -69,7 +66,7 @@ const Chat = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${user?.token}`,
           },
         },
       );

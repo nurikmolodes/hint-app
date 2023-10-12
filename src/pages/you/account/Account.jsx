@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import userIcon from "../../../assets/userIcon.svg";
 import openBlock from "../../../assets/open.svg";
 
-const Account = () => {
+const Account = ({ user }) => {
   const navigate = useNavigate();
   const data = [
     {
@@ -73,7 +73,7 @@ const Account = () => {
         <section className="user">
           <div className="left">
             <img src={userIcon} />
-            <span>Lora</span>
+            <span>{user?.info?.name}</span>
           </div>
           <img src={openBlock} />
         </section>
