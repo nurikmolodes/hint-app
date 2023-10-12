@@ -73,9 +73,6 @@ const Horoscope = ({ user }) => {
       console.error("Error:", error);
     }
   };
-  // useEffect(() => {
-  //   getUser();
-  // }, []);
   useEffect(() => {
     getHoroscope(activeItem);
     getMainInfo();

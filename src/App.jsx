@@ -14,6 +14,7 @@ import Account from "./pages/you/account/Account";
 import UserUpdate from "./pages/you/userUpdate/UserUpdate";
 import YouDetail from "./pages/you/YouDetail/YouDetail";
 import SignIn from "./pages/singin/SignIn";
+import Auth from "./pages/Auth";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -22,6 +23,12 @@ function App() {
     setUser(data);
     console.log(user);
   }
+  useEffect(() => {
+    if (user) {
+      navigate("/horoscope");
+    }
+  }, [user]);
+
   useEffect(() => {
     getFromLocalStorage();
   }, []);
@@ -106,8 +113,9 @@ function App() {
   return (
     <div className="wrapper">
       <Routes>
+        <Route path="/" element={<SignIn />} />
         {routes.map((route, index) => (
-          <Route key={index} path={route.path} exact element={route.component} />
+          <Route key={index} path={route.path} exact element={<Auth>{route.component}</Auth>} />
         ))}
       </Routes>
       {shouldDisplayNavbar && <Navigator />}

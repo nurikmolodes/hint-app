@@ -27,7 +27,8 @@ const SignIn = () => {
       .then((response) => {
         console.log("Response:", response.data);
         localStorage.setItem("user", JSON.stringify(response.data));
-        navigate("/horoscope");
+        // navigate("/horoscope");
+        window.location.replace("/horoscope");
         setLoading(false);
       })
       .catch((error) => {
