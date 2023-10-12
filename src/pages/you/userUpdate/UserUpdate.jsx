@@ -14,7 +14,7 @@ const UserUpdate = ({ user }) => {
   // FORM
   const [formData, setFormData] = useState({
     name: user?.info?.name,
-    gender: "male", // Default gender selection
+    gender: "Male", // Default gender selection
     dateOfBirth: user?.info?.birth_date,
     timeOfBirth: "00:00",
     placeOfBirth: "",
@@ -76,36 +76,26 @@ const UserUpdate = ({ user }) => {
   // SUBMIT FORM
   console.log(user);
   const params = {
-    yourGender: "Male",
-    yourInfo: {
-      dateOfBirth: user?.info?.birth_date || "2001-04-07",
-      timeOfBirth: user?.info.birth_time || "10:67",
-      lat: "7.57944",
-      lon: "-8.53778",
-    },
-    partnerInfo: {
-      dateOfBirth: formData.dateOfBirth,
-      timeOfBirth: formData.timeOfBirth,
-      name: formData.name,
-      lat: "7.57944",
-      lon: "-8.53778",
-    },
-    relationshipStatus: "crush",
+    name: formData.name,
+    dateOfBirth: formData.dateOfBirth,
+    lat: "-1422.10",
+    lon: "32.13",
+    timeOfBirth: formData.timeOfBirth,
+    placeOfBirth: formData.placeOfBirth,
+    gender: formData.gender,
   };
   const handleSubmit = async (event) => {
     setLoadingSubmit(true);
     event.preventDefault();
     console.log(formData);
     try {
-      const response = await axios.post(
-        "https://api.astropulse.app/api/astro/compatibility",
-        params,
-        {
-          headers: {
-            Authorization: `Bearer ${user?.token}`,
-          },
+      const response = await axios.patch("https://api.astropulse.app/api/users/profile", params, {
+        headers: {
+          Authorization: `Bearer ${user?.token}`,
         },
-      );
+      });
+      localStorage.setItem("user", JSON.stringify(response.data));
+      window.location.replace("/horoscope");
       console.log(response);
     } catch (error) {
       // Handle errors here
@@ -187,14 +177,14 @@ const UserUpdate = ({ user }) => {
                 <div className="gender-button">
                   <button
                     type="button"
-                    className={`gender-option ${formData.gender === "male" ? "active" : ""}`}
-                    onClick={() => handleGenderChange("male")}>
+                    className={`gender-option ${formData.gender === "Male" ? "active" : ""}`}
+                    onClick={() => handleGenderChange("Male")}>
                     Male
                   </button>
                   <button
                     type="button"
-                    className={`gender-option ${formData.gender === "female" ? "active" : ""}`}
-                    onClick={() => handleGenderChange("female")}>
+                    className={`gender-option ${formData.gender === "Female" ? "active" : ""}`}
+                    onClick={() => handleGenderChange("Female")}>
                     Female
                   </button>
                 </div>
