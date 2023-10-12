@@ -9,35 +9,7 @@ import notFound from "../../../assets/notFound.svg";
 import DateSelector from "../../../components/compatibility/dateSelector/DateSelector";
 import TimeSelector from "../../../components/compatibility/timeSelector/TimeSelector";
 
-const AddFriend = ({ getTheResultsCompatibility }) => {
-  // USER
-  const [user, setUser] = useState(null);
-
-  const data = {
-    email: "nurikgentle@gmail.com",
-    password: "ND#3XAb",
-  };
-
-  const getUser = () => {
-    // Send a POST request using Axios
-    axios
-      .post("https://api.astropulse.app/api/auth", data, {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      })
-      .then((response) => {
-        console.log("Response:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
+const AddFriend = ({ getTheResultsCompatibility, user }) => {
   const navigate = useNavigate();
   // LOADING
   const [loadingSubmit, setLoadingSubmit] = useState(false);
@@ -110,8 +82,8 @@ const AddFriend = ({ getTheResultsCompatibility }) => {
   const params = {
     yourGender: "Male",
     yourInfo: {
-      dateOfBirth: user?.info?.birth_date || "2001-04-07",
-      timeOfBirth: user?.info.birth_time || "10:67",
+      dateOfBirth: user?.info?.birth_date,
+      timeOfBirth: user?.info.birth_time,
       lat: user?.info?.latitude,
       lon: user?.info?.longitude,
     },
@@ -269,7 +241,7 @@ const AddFriend = ({ getTheResultsCompatibility }) => {
                       {cities &&
                         cities?.map((a) => (
                           <span
-                            onClick={() => selectCity(a.value, a.latitude, a.longitude)}
+                            onClick={() => selectCity(a.place_name, a.latitude, a.longitude)}
                             key={a.place_name}>
                             {a.place_name}
                           </span>

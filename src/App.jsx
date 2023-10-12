@@ -24,7 +24,7 @@ function App() {
     console.log(user);
   }
   useEffect(() => {
-    if (user) {
+    if (user && location.pathname === "/horoscope") {
       navigate("/horoscope");
     }
   }, [user]);
@@ -76,7 +76,7 @@ function App() {
     },
     {
       path: "/addfriend",
-      component: <AddFriend getTheResultsCompatibility={getTheResultsCompatibility} />,
+      component: <AddFriend getTheResultsCompatibility={getTheResultsCompatibility} user={user} />,
       label: "Add Friend",
     },
     {

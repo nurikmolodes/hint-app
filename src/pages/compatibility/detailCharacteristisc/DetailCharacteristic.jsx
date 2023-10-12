@@ -1,8 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./DetailCharacteristic.scss";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import back from "../../../assets/back.svg";
-import share from "../../../assets/share.svg";
+import shareImage from "../../../assets/share.svg";
+import html2canvas from "html2canvas";
+import Share from "../../../components/compatibility/share/Share";
+import axios from "axios";
 
 const DetailCharacteristic = ({ match }) => {
   const { CharacteristicId } = useParams();
@@ -11,6 +14,70 @@ const DetailCharacteristic = ({ match }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  ////share
+  const [link, setLink] = useState("");
+  console.log(link);
+  const [share, setShare] = useState(false);
+  const [accessToken, setAccessToken] = useState(
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJ0b2tlbklkIjoiMTcxZTk2MTEtNzkwYy00ZjU4LWI5ZmUtMmM2ODAyZDljYjg1IiwiaWF0IjoxNjk1NzkyNjQ2fQ.Xo9EZCWwa7S4iN-O5MupiKmQpMXtuH1JXGZ5kMf6fSE",
+  ); // Replace with your actual token
+  const [blob, setBlob] = useState(null);
+  console.log(blob);
+  const [pdfData, setPdfData] = useState("");
+
+  const base64Decoder = async () => {
+    try {
+      const response = await fetch(pdfData);
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+
+      const blobData = await response.blob();
+      setBlob(blobData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const componentRef = useRef(null);
+
+  const generate = () => {
+    if (componentRef.current) {
+      html2canvas(componentRef.current).then((canvas) => {
+        // Convert canvas to a data URL
+        const image = canvas.toDataURL("image/png");
+        setPdfData(image);
+      });
+    }
+  };
+  const sendPDF = async () => {
+    if (!pdfData) {
+      return;
+    }
+
+    try {
+      const apiEndpoint = "https://api.astropulse.app/api/share";
+      const response = await axios.post(
+        apiEndpoint,
+        { image: blob },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+      );
+      setLink(response.data?.publicUrl);
+    } catch (error) {
+      console.error("Error sending PDF:", error);
+    }
+  };
+  useEffect(() => {
+    base64Decoder(pdfData);
+    generate();
+    sendPDF();
+  }, [pdfData]);
+  /////share
   return (
     <div className="detail-characteristic">
       <header>
@@ -20,7 +87,7 @@ const DetailCharacteristic = ({ match }) => {
           </Link>
         </div>
       </header>
-      <div className="basic-identities">
+      <div className="basic-identities" ref={componentRef}>
         <h3>Basic Identities</h3>
         <p>
           {CharacteristicId === "basic-romantic" && match?.love_report?.slice(0, 4).map((a) => a)}
@@ -47,7 +114,16 @@ const DetailCharacteristic = ({ match }) => {
           </div>
         </div>
         <div className="share">
-          <img src={share} />
+          <img
+            src={shareImage}
+            onClick={() => {
+              sendPDF();
+              setShare(!share);
+            }}
+          />
+          {share && (
+            <Share description={"The results of a Romantic report"} match={match} link={link} />
+          )}
         </div>
       </div>
       <div className="pros">

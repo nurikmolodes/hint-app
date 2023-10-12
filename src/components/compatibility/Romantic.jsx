@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState, useRef , useEffect} from "react";
 import "../../styles/Romantic.scss";
 import lora from "../../assets/lora.svg";
 import daniel from "../../assets/daniel.svg";
 import threeHearts from "../../assets/threeHearts.svg";
-import share from "../../assets/shareScore.svg";
+import shareImage from "../../assets/shareScore.svg";
 import basic from "../../assets/basic.svg";
 import emotion from "../../assets/emotion.svg";
 import { useNavigate } from "react-router-dom";
 import { Document, Page, Text, View, StyleSheet, PDFDownloadLink } from "@react-pdf/renderer";
+import Share from "./share/Share";
+import axios from "axios";
+import html2canvas from "html2canvas";
 
 const Romantic = ({ match, user }) => {
   const characteristics = [
@@ -72,10 +75,74 @@ const Romantic = ({ match, user }) => {
       </Document>
     );
   };
+  ////share
+  const [link, setLink] = useState("");
+  console.log(link);
+  const [share, setShare] = useState(false);
+  const [accessToken, setAccessToken] = useState(
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJ0b2tlbklkIjoiMTcxZTk2MTEtNzkwYy00ZjU4LWI5ZmUtMmM2ODAyZDljYjg1IiwiaWF0IjoxNjk1NzkyNjQ2fQ.Xo9EZCWwa7S4iN-O5MupiKmQpMXtuH1JXGZ5kMf6fSE",
+  ); // Replace with your actual token
+  const [blob, setBlob] = useState(null);
+  console.log(blob);
+  const [pdfData, setPdfData] = useState("");
+
+  const base64Decoder = async () => {
+    try {
+      const response = await fetch(pdfData);
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+
+      const blobData = await response.blob();
+      setBlob(blobData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const componentRef = useRef(null);
+
+  const generate = () => {
+    if (componentRef.current) {
+      html2canvas(componentRef.current).then((canvas) => {
+        // Convert canvas to a data URL
+        const image = canvas.toDataURL("image/png");
+        setPdfData(image);
+      });
+    }
+  };
+  const sendPDF = async () => {
+    if (!pdfData) {
+      return;
+    }
+
+    try {
+      const apiEndpoint = "https://api.astropulse.app/api/share";
+      const response = await axios.post(
+        apiEndpoint,
+        { image: blob },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+      );
+      setLink(response.data?.publicUrl);
+    } catch (error) {
+      console.error("Error sending PDF:", error);
+    }
+  };
+  useEffect(() => {
+    base64Decoder(pdfData);
+    generate();
+    sendPDF();
+  }, [pdfData]);
+  /////share
 
   return (
     <div className="romantic">
-      <div className="match">
+      <div className="match" ref={componentRef}>
         <div className="users">
           <div className="user">
             <img src={daniel} />
@@ -95,7 +162,16 @@ const Romantic = ({ match, user }) => {
           </div>
         </div>
         <div className="share">
-          <img src={share} />
+          <img
+            src={shareImage}
+            onClick={() => {
+              sendPDF();
+              setShare(!share);
+            }}
+          />
+          {share && (
+            <Share description={"The results of a Romantic report"} match={match} link={link} />
+          )}
         </div>
       </div>
       <div className="characteristics">

@@ -32,7 +32,7 @@ const Friendship = ({ match, user }) => {
   const navigate = useNavigate();
 
   const navigateToAnotherPage = (id) => {
-    navigate(`/${id}`);
+    navigate(`/resultsCompatibility/${id}`);
   };
   const styles = StyleSheet.create({
     page: {
@@ -73,6 +73,8 @@ const Friendship = ({ match, user }) => {
       </Document>
     );
   };
+
+  ////share
   const [link, setLink] = useState("");
   console.log(link);
   const [share, setShare] = useState(false);
@@ -135,7 +137,7 @@ const Friendship = ({ match, user }) => {
     generate();
     sendPDF();
   }, [pdfData]);
-
+  /////share
   return (
     <div className="friendship">
       <div className="match" ref={componentRef}>

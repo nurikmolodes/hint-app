@@ -103,7 +103,7 @@ const UserUpdate = ({ user }) => {
         },
       });
       localStorage.setItem("user", JSON.stringify(response.data));
-      // window.location.replace("/horoscope");
+      window.location.replace("/horoscope");
       console.log(response);
     } catch (error) {
       // Handle errors here

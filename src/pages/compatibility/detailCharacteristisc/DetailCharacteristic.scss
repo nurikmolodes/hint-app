@@ -14,6 +14,15 @@
     border-radius: 16px;
     background-repeat: no-repeat !important;
     background-size: cover !important;
+    .share {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      margin-top: 17px;
+      img {
+        cursor: pointer;
+      }
+    }
     h3 {
       color: #e48d21;
       font-size: 17px;
