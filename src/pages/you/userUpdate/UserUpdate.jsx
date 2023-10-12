@@ -18,6 +18,8 @@ const UserUpdate = ({ user }) => {
     dateOfBirth: user?.info?.birth_date,
     timeOfBirth: "00:00",
     placeOfBirth: "",
+    lat: "",
+    lon: "",
     unknownTimeOfBirth: false,
   });
   //date
@@ -29,7 +31,7 @@ const UserUpdate = ({ user }) => {
   //time
   const [showTime, setShowTime] = useState(false);
   const getTime = (date) => {
-    setFormData({ ...formData, timeOfBirth: date });
+    setFormData({ ...formData, timeOfBirth: date.trim() });
     setShowTime(false);
   };
   // DATE
@@ -62,7 +64,12 @@ const UserUpdate = ({ user }) => {
   const [showCities, setShowCities] = useState(false);
   const selectCity = (city) => {
     console.log(city);
-    setFormData({ ...formData, placeOfBirth: city });
+    setFormData({
+      ...formData,
+      placeOfBirth: city?.place_name,
+      lon: city?.longitude,
+      lat: city?.latitude,
+    });
     setShowCities(false);
     setShowContent(true);
   };
@@ -78,8 +85,8 @@ const UserUpdate = ({ user }) => {
   const params = {
     name: formData.name,
     dateOfBirth: formData.dateOfBirth,
-    lat: "-1422.10",
-    lon: "32.13",
+    lat: formData.lat,
+    lon: formData.lon,
     timeOfBirth: formData.timeOfBirth,
     placeOfBirth: formData.placeOfBirth,
     gender: formData.gender,
@@ -92,10 +99,11 @@ const UserUpdate = ({ user }) => {
       const response = await axios.patch("https://api.astropulse.app/api/users/profile", params, {
         headers: {
           Authorization: `Bearer ${user?.token}`,
+          "Content-Type": "application/x-www-form-urlencoded",
         },
       });
       localStorage.setItem("user", JSON.stringify(response.data));
-      window.location.replace("/horoscope");
+      // window.location.replace("/horoscope");
       console.log(response);
     } catch (error) {
       // Handle errors here
@@ -109,30 +117,11 @@ const UserUpdate = ({ user }) => {
     setShowCities(true);
     setFormData({ ...formData, placeOfBirth: K });
     setShowContent(K === "");
-    const url = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address";
-    const token = "d8dfbebbee14478cd5328086951a7d38b3aaec9d";
-
-    const options = {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: "Token " + token,
-      },
-    };
+    const url = `https://api.astropulse.app/api/astro/search/${K}`;
 
     try {
-      const place = await axios.post(
-        url,
-        {
-          query: K,
-          locations: [{ country: "*" }],
-          language: "en",
-        },
-        options,
-      );
-      setCities(place.data.suggestions);
+      const place = await axios.get(url);
+      setCities(place.data?.geonames);
       console.log(cities);
     } catch (e) {
       console.log(e);
@@ -234,8 +223,8 @@ const UserUpdate = ({ user }) => {
                 <div className="cities">
                   {cities &&
                     cities?.map((a) => (
-                      <span onClick={() => selectCity(a.value)} key={a.value}>
-                        {a.value}
+                      <span onClick={() => selectCity(a)} key={a.place_name}>
+                        {a.place_name}
                       </span>
                     ))}
                 </div>

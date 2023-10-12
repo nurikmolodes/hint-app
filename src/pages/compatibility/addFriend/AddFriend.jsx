@@ -48,6 +48,8 @@ const AddFriend = ({ getTheResultsCompatibility }) => {
     dateOfBirth: "1991-01-01",
     timeOfBirth: "00:00",
     placeOfBirth: "",
+    lat: "",
+    lon: "",
     unknownTimeOfBirth: false,
   });
   //date
@@ -90,9 +92,9 @@ const AddFriend = ({ getTheResultsCompatibility }) => {
   // CITIES
   const [showContent, setShowContent] = useState(true);
   const [showCities, setShowCities] = useState(false);
-  const selectCity = (city) => {
+  const selectCity = (city, lat, lon) => {
     console.log(city);
-    setFormData({ ...formData, placeOfBirth: city });
+    setFormData({ ...formData, placeOfBirth: city, lat: lat, lon: lon });
     setShowCities(false);
     setShowContent(true);
   };
@@ -110,15 +112,15 @@ const AddFriend = ({ getTheResultsCompatibility }) => {
     yourInfo: {
       dateOfBirth: user?.info?.birth_date || "2001-04-07",
       timeOfBirth: user?.info.birth_time || "10:67",
-      lat: "7.57944",
-      lon: "-8.53778",
+      lat: user?.info?.latitude,
+      lon: user?.info?.longitude,
     },
     partnerInfo: {
       dateOfBirth: formData.dateOfBirth,
       timeOfBirth: formData.timeOfBirth,
       name: formData.name,
-      lat: "7.57944",
-      lon: "-8.53778",
+      lat: formData.lat,
+      lon: formData.lon,
     },
     relationshipStatus: "crush",
   };
@@ -153,30 +155,11 @@ const AddFriend = ({ getTheResultsCompatibility }) => {
     setShowCities(true);
     setFormData({ ...formData, placeOfBirth: K });
     setShowContent(K === "");
-    const url = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address";
-    const token = "d8dfbebbee14478cd5328086951a7d38b3aaec9d";
-
-    const options = {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: "Token " + token,
-      },
-    };
+    const url = `https://api.astropulse.app/api/astro/search/${K}`;
 
     try {
-      const place = await axios.post(
-        url,
-        {
-          query: K,
-          locations: [{ country: "*" }],
-          language: "en",
-        },
-        options,
-      );
-      setCities(place.data.suggestions);
+      const place = await axios.get(url);
+      setCities(place.data?.geonames);
       console.log(cities);
     } catch (e) {
       console.log(e);
@@ -285,8 +268,10 @@ const AddFriend = ({ getTheResultsCompatibility }) => {
                     <div className="cities">
                       {cities &&
                         cities?.map((a) => (
-                          <span onClick={() => selectCity(a.value)} key={a.value}>
-                            {a.value}
+                          <span
+                            onClick={() => selectCity(a.value, a.latitude, a.longitude)}
+                            key={a.place_name}>
+                            {a.place_name}
                           </span>
                         ))}
                     </div>
