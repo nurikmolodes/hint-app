@@ -88,7 +88,17 @@ const DetailCharacteristic = ({ match }) => {
         </div>
       </header>
       <div className="basic-identities" ref={componentRef}>
-        <h3>Basic Identities</h3>
+        <h3 style={CharacteristicId === "emotional-romantic" ? { color: "#5480F0" } : null}>
+          {CharacteristicId === "basic-romantic"
+            ? "Basic Identities"
+            : CharacteristicId === "basic-friend"
+            ? "Basic Identities"
+            : CharacteristicId === "emotional-romantic"
+            ? "Emotional Styles"
+            : CharacteristicId === "emotion-friend"
+            ? "Emotional Styles"
+            : ""}
+        </h3>
         <p>
           {CharacteristicId === "basic-romantic" && match?.love_report?.slice(0, 4).map((a) => a)}
           {CharacteristicId === "emotional-romantic" && match?.love_report?.slice(3).map((a) => a)}
@@ -97,7 +107,7 @@ const DetailCharacteristic = ({ match }) => {
           {CharacteristicId === "emotion-friend" &&
             match?.friendship_report?.slice(4).map((a) => a)}
         </p>
-        <div className="duo">
+        {/* <div className="duo">
           <div className="first">
             <div className="zodiac">
               <h4>Lora</h4>
@@ -112,7 +122,7 @@ const DetailCharacteristic = ({ match }) => {
             </div>
             <p>Lorem Ipsum is simply dummy text.</p>
           </div>
-        </div>
+        </div> */}
         <div className="share">
           <img
             src={shareImage}
