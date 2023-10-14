@@ -97,15 +97,15 @@ const YouDetail = () => {
                 </section>
                 <p>{data?.report}</p>
               </div>
-              <div className="dislike">
+              {/* <div className="dislike">
                 <section>
                   <img src={dislike} />
                   <span>Dislike</span>
                 </section>
                 <p>{data?.report}</p>
-              </div>
+              </div> */}
             </div>
-            <hr />
+            {/* <hr />
             <div className="below">
               <div className="sign">
                 <section>
@@ -121,12 +121,12 @@ const YouDetail = () => {
                 </section>
                 <p>{data?.report}</p>
               </div>
-            </div>
+            </div> */}
           </div>
           <img className="figure" src={strangeFigure} />
         </div>
       )}
-      {loading ? (
+      {/* {loading ? (
         <div className="loading-content">
           <Card width="100%" sx={{ boxShadow: "none" }}>
             <CardContent width="100%">
@@ -156,7 +156,7 @@ const YouDetail = () => {
         <article>
           <p>{data?.report}</p>
         </article>
-      )}
+      )} */}
     </div>
   );
 };
