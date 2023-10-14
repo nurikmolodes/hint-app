@@ -58,17 +58,16 @@ const Friendship = ({ match, user }) => {
       <Document>
         <Page size="A4" style={styles.page}>
           <Text style={styles.title}>Friendship Report:</Text>
+          <Text style={styles.title}>Compatibility Percentage:</Text>
+          <Text style={styles.paragraph}>{`${match?.compatibility_percentage}%`}</Text>
+          <Text style={styles.title}>Compatibility Report:</Text>
+          <Text style={styles.paragraph}>{match.compatibility_report}</Text>
+
           {match.friendship_report.map((paragraph, index) => (
             <View key={index} style={styles.section}>
               <Text style={styles.paragraph}>{`${index + 1}. ${paragraph}`}</Text>
             </View>
           ))}
-
-          <Text style={styles.title}>Compatibility Report:</Text>
-          <Text style={styles.paragraph}>{match.compatibility_report}</Text>
-
-          <Text style={styles.title}>Compatibility Percentage:</Text>
-          <Text style={styles.paragraph}>{`${match?.compatibility_percentage}%`}</Text>
         </Page>
       </Document>
     );
