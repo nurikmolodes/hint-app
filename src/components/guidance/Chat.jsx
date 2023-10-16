@@ -8,6 +8,7 @@ const Chat = ({ user }) => {
   const [messages, setMessages] = useState([]);
   console.log(messages);
   const [userMessage, setUserMessage] = useState("");
+  const [loadingMessage, setLoadingMessage] = useState(false);
 
   // Load chat history from sessionStorage when the component mounts
   useEffect(() => {
@@ -42,6 +43,7 @@ const Chat = ({ user }) => {
   };
 
   const handleSendMessage = async () => {
+    setLoadingMessage(true);
     if (userMessage.trim() === "") return;
 
     const newUserMessage = {
@@ -74,6 +76,7 @@ const Chat = ({ user }) => {
       // Handle the response and add the assistant's reply to the state
       const assistantReply = response.data;
       setMessages([...newMessages, assistantReply]);
+      setLoadingMessage(false);
     } catch (error) {
       console.error("Error sending message:", error);
     }
@@ -103,6 +106,7 @@ const Chat = ({ user }) => {
               <h5>{message.role === "assistant" && message.role.toUpperCase()}</h5>
               <p>{message.content}</p>
             </div>
+
             <div className="message-timestamp">
               <span>{message.timestamp}</span>
               <span>
@@ -125,6 +129,14 @@ const Chat = ({ user }) => {
             </div>
           </div>
         ))}
+        {loadingMessage && (
+          <div class="loader-message">
+            <div class="dash uno"></div>
+            <div class="dash dos"></div>
+            <div class="dash tres"></div>
+            <div class="dash cuatro"></div>
+          </div>
+        )}
       </div>
       <div className="user-input">
         <input
