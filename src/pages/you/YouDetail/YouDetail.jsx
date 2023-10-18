@@ -126,7 +126,7 @@ const YouDetail = () => {
           <img className="figure" src={strangeFigure} />
         </div>
       )}
-      {/* {loading ? (
+      {loading ? (
         <div className="loading-content">
           <Card width="100%" sx={{ boxShadow: "none" }}>
             <CardContent width="100%">
@@ -154,9 +154,9 @@ const YouDetail = () => {
         </div>
       ) : (
         <article>
-          <p>{data?.report}</p>
+          <p>{data?.house_report}</p>
         </article>
-      )} */}
+      )}
     </div>
   );
 };
