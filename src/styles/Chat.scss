@@ -121,8 +121,8 @@
       width: 30px;
       height: 10px;
       border-radius: 8px;
-      background: #e6e6e8;
-      box-shadow: 0 0 10px 0 #fecdff;
+      background: var(--Blue-2, #bfd2ff);
+      // box-shadow: 0 0 10px 0 #bfd2ff;
     }
 
     .uno {
