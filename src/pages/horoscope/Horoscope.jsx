@@ -10,7 +10,7 @@ const Horoscope = ({ user }) => {
   const items = [
     { id: 1, text: "Today", value: "daily" },
     { id: 2, text: "Tomorrow", value: "next" },
-    { id: 3, text: "Week", value: "weekly" },
+    // { id: 3, text: "Week", value: "weekly" },
     { id: 4, text: "Month", value: "monthly" },
   ];
 
