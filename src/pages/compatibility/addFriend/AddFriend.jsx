@@ -13,9 +13,10 @@ const AddFriend = ({ getTheResultsCompatibility, user }) => {
   const navigate = useNavigate();
   // LOADING
   const [loadingSubmit, setLoadingSubmit] = useState(false);
-  // FORM
+  const [saveData, setSavedData] = useState(null);
+  console.log(saveData);
   const [formData, setFormData] = useState({
-    name: "",
+    name: saveData?.partnerInfo?.name || "",
     gender: "male", // Default gender selection
     dateOfBirth: "1991-01-01",
     timeOfBirth: "00:00",
@@ -24,6 +25,17 @@ const AddFriend = ({ getTheResultsCompatibility, user }) => {
     lon: "",
     unknownTimeOfBirth: false,
   });
+  useEffect(() => {
+    const storedData = localStorage.getItem("myPartner");
+
+    if (storedData) {
+      // If data is found, parse it from a JSON string to an object
+      const parsedObject = JSON.parse(storedData);
+      setFormData(parsedObject?.partnerInfo);
+    }
+  }, []);
+  // FORM
+
   //date
   const [showDate, setShowDate] = useState(false);
   const getDate = (date) => {
@@ -93,6 +105,8 @@ const AddFriend = ({ getTheResultsCompatibility, user }) => {
       name: formData.name,
       lat: formData.lat,
       lon: formData.lon,
+      placeOfBirth: formData.placeOfBirth,
+      gender: formData.gender,
     },
     relationshipStatus: "crush",
   };
@@ -113,6 +127,7 @@ const AddFriend = ({ getTheResultsCompatibility, user }) => {
       // Handle the response here (e.g., update state with the response data)
       getTheResultsCompatibility({ ...response.data, partnerName: formData.name });
       // Handle form submission here, e.g., send data to a server
+      localStorage.setItem("myPartner", JSON.stringify(params));
       setLoadingSubmit(false);
       navigate("/resultsCompatibility");
     } catch (error) {

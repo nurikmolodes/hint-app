@@ -37,8 +37,8 @@ const Horoscope = ({ user }) => {
       const response = await axios.post(
         `https://api.astropulse.app/api/astro/horoscope/${active.value}`,
         {
-          dateOfBirth: "1980-02-10",
-          name: "fName",
+          dateOfBirth: user?.info?.birth_date,
+          name: user?.info?.name,
         },
         {
           headers: {
