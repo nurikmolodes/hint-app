@@ -3,9 +3,15 @@ import "./YouDetail.scss";
 import back from "../../../assets/back.svg";
 import like from "../../../assets/like.svg";
 import dislike from "../../../assets/dislike.svg";
-import home from '../../../assets/home.svg'
+import home from "../../../assets/home.svg";
 import sign from "../../../assets/sign.svg";
 import mantra from "../../../assets/mantra.svg";
+import sun from "../../../assets/sunx.svg";
+import moon from "../../../assets/moonx.svg";
+import ricingsign from "../../../assets/ricingsign.svg";
+import mercury from "../../../assets/mercuryx.svg";
+import jupiter from "../../../assets/jupiterx.svg";
+import midheaven from "../../../assets/midheavenx.svg";
 import strangeFigure from "../../../assets/strangeFigure.svg";
 import axios from "axios";
 import { Card, CardContent, CardHeader, Skeleton } from "@mui/material";
@@ -125,7 +131,23 @@ const YouDetail = () => {
               <div className="upper">
                 <div className="like">
                   <section>
-                    <img src={home} />
+                    <img
+                      src={
+                        name === "Sun"
+                          ? sun
+                          : name === "Moon"
+                          ? moon
+                          : name === "Venus"
+                          ? ricingsign
+                          : name === "Mercury"
+                          ? mercury
+                          : name === "Jupiter"
+                          ? jupiter
+                          : name === "Mars"
+                          ? midheaven
+                          : ""
+                      }
+                    />
                     <span>
                       Your {name === "Venus" ? "Ricing Sign" : name === "Mars" ? "MidHeaven" : name}{" "}
                       is
@@ -171,7 +193,7 @@ const YouDetail = () => {
               <div className="upper">
                 <div className="dislike">
                   <section>
-                    <img src={dislike} />
+                    <img src={home} />
                     <span>Your house is</span>
                   </section>
                   <p>{data?.house_report}</p>
