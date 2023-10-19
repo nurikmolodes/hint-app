@@ -1,7 +1,6 @@
 .sticky-footer {
   padding: 10px;
-  position: fixed;
-  width: 738px;
+  position: sticky;
   bottom: 15px;
   border-radius: 16px;
   margin: 15px;
@@ -10,27 +9,6 @@
   box-shadow: 0px 15px 20px 0px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
-  @media(max-width: 540px) {
-    width: 510px;
-  }
-  @media(max-width: 425px) {
-    width: 395px;
-  }
-  @media(max-width: 414px) {
-    width: 385px;
-  }
-  @media(max-width: 393px) {
-    width: 362px;
-  }
-  @media(max-width: 390px) {
-    width: 362px;
-  }
-  @media(max-width: 375px) {
-    width: 345px;
-  }
-  @media(max-width: 360px) {
-    width: 330px;
-  }
 }
 
 .sticky-footer ul {
