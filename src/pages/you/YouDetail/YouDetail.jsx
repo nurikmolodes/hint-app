@@ -3,6 +3,7 @@ import "./YouDetail.scss";
 import back from "../../../assets/back.svg";
 import like from "../../../assets/like.svg";
 import dislike from "../../../assets/dislike.svg";
+import home from '../../../assets/home.svg'
 import sign from "../../../assets/sign.svg";
 import mantra from "../../../assets/mantra.svg";
 import strangeFigure from "../../../assets/strangeFigure.svg";
@@ -124,7 +125,7 @@ const YouDetail = () => {
               <div className="upper">
                 <div className="like">
                   <section>
-                    <img src={like} />
+                    <img src={home} />
                     <span>
                       Your {name === "Venus" ? "Ricing Sign" : name === "Mars" ? "MidHeaven" : name}{" "}
                       is
