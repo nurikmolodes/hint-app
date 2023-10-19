@@ -16,15 +16,12 @@
     .back {
       a {
         display: flex;
-        justify-content: space-between;
-        // gap: 27%;
+        justify-content: flex-start;
         text-decoration: none;
-        // @media (max-width: 450px) {
-        //   gap: 20%;
-        // }
-        // @media (max-width: 350px) {
-        //   gap: 15%;
-        // }
+        img {
+          display: flex;
+          justify-content: flex-start;
+        }
       }
     }
   }

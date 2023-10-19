@@ -55,14 +55,14 @@ const YouDetail = () => {
             <img src={back} />
           </Link>
         </div>
-        <div className="reminder">
+        {/* <div className="reminder">
           {data.sign_name && (
             <span>
               Your {name === "Venus" ? "Ricing Sign" : name === "Mars" ? "MidHeaven" : name} is{" "}
               {data?.sign_name}
             </span>
           )}
-        </div>
+        </div> */}
       </header>
       {/* <h1>{name}</h1> */}
       <div className="title">
@@ -95,30 +95,57 @@ const YouDetail = () => {
               <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
               <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
               <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
+              <Skeleton animation="wave" height={10} style={{ marginBottom: 10 }} width="100%" />
               <Skeleton animation="wave" height={10} width="100%" />
             </CardContent>
           </Card>
         </div>
       ) : (
-        <div className={`upper-container ${name}`}>
-          <div className="content">
-            <div className="upper">
-              <div className="like">
-                <section>
+        <>
+          <div className={`upper-container ${name}`}>
+            <div className="content">
+              <div className="upper">
+                <div className="like">
+                  <section>
+                    <img src={like} />
+                    <span>
+                      Your {name === "Venus" ? "Ricing Sign" : name === "Mars" ? "MidHeaven" : name}{" "}
+                      is
+                    </span>
+                  </section>
+                  {data.sign_name && (
+                    <p>
+                      Your {name === "Venus" ? "Ricing Sign" : name === "Mars" ? "MidHeaven" : name}{" "}
+                      is {data?.sign_name}
+                    </p>
+                  )}
+                </div>
+                <div className="like">
+                  {/* <section>
                   <img src={like} />
                   <span>Like</span>
-                </section>
-                <p>{data?.report}</p>
+                </section> */}
+                  <p>{data?.report}</p>
+                </div>
               </div>
-              {/* <div className="dislike">
-                <section>
-                  <img src={dislike} />
-                  <span>Dislike</span>
-                </section>
-                <p>{data?.report}</p>
-              </div> */}
-            </div>
-            {/* <hr />
+              {/* <hr />
             <div className="below">
               <div className="sign">
                 <section>
@@ -135,11 +162,43 @@ const YouDetail = () => {
                 <p>{data?.report}</p>
               </div>
             </div> */}
+            </div>
+            <img className="figure" src={strangeFigure} />
           </div>
-          <img className="figure" src={strangeFigure} />
-        </div>
+          <div className={`upper-container ${name}`}>
+            <div className="content">
+              <div className="upper">
+                <div className="dislike">
+                  <section>
+                    <img src={dislike} />
+                    <span>Your house is</span>
+                  </section>
+                  <p>{data?.house_report}</p>
+                </div>
+              </div>
+              {/* <hr />
+            <div className="below">
+              <div className="sign">
+                <section>
+                  <img src={sign} />
+                  <span>Сelebrities under the sign</span>
+                </section>
+                <p>{data?.report}</p>
+              </div>
+              <div className="mantra">
+                <section>
+                  <img src={mantra} />
+                  <span>Your mantra</span>
+                </section>
+                <p>{data?.report}</p>
+              </div>
+            </div> */}
+            </div>
+            <img className="figure" src={strangeFigure} />
+          </div>
+        </>
       )}
-      {loading ? (
+      {/* {loading ? (
         <div className="loading-content">
           <Card width="100%" sx={{ boxShadow: "none" }}>
             <CardContent width="100%">
@@ -169,7 +228,7 @@ const YouDetail = () => {
         <article>
           <p>{data?.house_report}</p>
         </article>
-      )}
+      )} */}
     </div>
   );
 };
