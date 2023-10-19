@@ -1,5 +1,33 @@
 .you-detail {
   margin: 15px;
+  header {
+    display: flex;
+    align-items: center;
+    .reminder {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      span {
+        color: rgb(100, 102, 111);
+        font-size: 16px;
+        padding-right: 65px;
+      }
+    }
+    .back {
+      a {
+        display: flex;
+        justify-content: space-between;
+        // gap: 27%;
+        text-decoration: none;
+        // @media (max-width: 450px) {
+        //   gap: 20%;
+        // }
+        // @media (max-width: 350px) {
+        //   gap: 15%;
+        // }
+      }
+    }
+  }
   .title {
     margin-top: 20px;
     span {

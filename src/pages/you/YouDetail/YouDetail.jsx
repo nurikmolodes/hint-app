@@ -55,10 +55,23 @@ const YouDetail = () => {
             <img src={back} />
           </Link>
         </div>
+        <div className="reminder">
+          {data.sign_name && (
+            <span>
+              Your {name === "Venus" ? "Ricing Sign" : name === "Mars" ? "MidHeaven" : name} is{" "}
+              {data?.sign_name}
+            </span>
+          )}
+        </div>
       </header>
       {/* <h1>{name}</h1> */}
       <div className="title">
-        <span>How you see yourself</span>
+        {name === "Sun" && <span>Your identity</span>}
+        {name === "Moon" && <span>Your emotions</span>}
+        {name === "Venus" && <span>Ricing sign</span>}
+        {name === "Mercury" && <span>Your interaction</span>}
+        {name === "Jupiter" && <span>Your aspirations</span>}
+        {name === "Mars" && <span>Your Fortune</span>}
       </div>
       {loading ? (
         <div className="loading-content">
