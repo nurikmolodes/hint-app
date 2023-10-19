@@ -162,7 +162,7 @@ const AddFriend = ({ getTheResultsCompatibility, user }) => {
 
   return (
     <div>
-      {loadingSubmit ? (
+      {true ? (
         <Loading />
       ) : (
         <div className="addFriend">
