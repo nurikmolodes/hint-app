@@ -12,6 +12,7 @@ const Loading = () => {
     <div className="loading">
       <span>Creating the report</span>
       <Lottie
+        style={{ height: 750 }}
         animationData={window.innerWidth > 500 ? animationIpad : animationIphone} // JSON данные анимации
         loop={true} // Повторять ли анимацию
         autoplay={true} // Автоматически ли проигрывать анимацию
