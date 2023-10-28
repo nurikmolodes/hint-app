@@ -78,9 +78,7 @@ const Romantic = ({ match, user }) => {
   const [link, setLink] = useState("");
   console.log(link);
   const [share, setShare] = useState(false);
-  const [accessToken, setAccessToken] = useState(
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJ0b2tlbklkIjoiMTcxZTk2MTEtNzkwYy00ZjU4LWI5ZmUtMmM2ODAyZDljYjg1IiwiaWF0IjoxNjk1NzkyNjQ2fQ.Xo9EZCWwa7S4iN-O5MupiKmQpMXtuH1JXGZ5kMf6fSE",
-  ); // Replace with your actual token
+  const [accessToken, setAccessToken] = useState(""); // Replace with your actual token
   const [blob, setBlob] = useState(null);
   console.log(blob);
   const [pdfData, setPdfData] = useState("");
@@ -138,6 +136,10 @@ const Romantic = ({ match, user }) => {
     sendPDF();
   }, [pdfData]);
   /////share
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("user"));
+    setAccessToken(token?.token);
+  }, []);
 
   return (
     <div className="romantic">

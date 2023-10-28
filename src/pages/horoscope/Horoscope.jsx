@@ -28,10 +28,10 @@ const Horoscope = ({ user }) => {
   const [loadingHoroscope, setLoadingHoroscope] = useState(true);
   const [loadingMainInfo, setLoadingMainInfo] = useState(true);
   console.log(horoscope);
-  const params = {
-    email: "nurikgentle@gmail.com",
-    password: "ND#3XAb",
-  };
+  // const params = {
+  //   email: "nurikgentle@gmail.com",
+  //   password: "ND#3XAb",
+  // };
   const getHoroscope = async (active) => {
     try {
       const response = await axios.post(
