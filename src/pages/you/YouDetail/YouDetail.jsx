@@ -25,10 +25,10 @@ const YouDetail = ({ user }) => {
   const getTheDescription = async () => {
     setLoading(true);
     const formdata = {
-      dateOfBirth: "1990-02-10",
-      timeOfBirth: "10:20",
-      lat: "7.57944",
-      lon: "-8.53778",
+      dateOfBirth: user?.info?.birth_date,
+      timeOfBirth: user?.info?.birth_time,
+      lat: user?.info?.latitude,
+      lon: user?.info?.longitude,
     };
     try {
       const response = await axios.post(
