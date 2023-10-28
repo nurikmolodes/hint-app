@@ -12,6 +12,11 @@ import TimeSelector from "../../../components/compatibility/timeSelector/TimeSel
 const AddFriend = ({ getTheResultsCompatibility, user }) => {
   const navigate = useNavigate();
   // LOADING
+  const [accessToken, setAccessToken] = useState("");
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("user"));
+    setAccessToken(token?.token);
+  }, []);
   const [loadingSubmit, setLoadingSubmit] = useState(false);
   const [saveData, setSavedData] = useState(null);
   console.log(saveData);
@@ -120,7 +125,7 @@ const AddFriend = ({ getTheResultsCompatibility, user }) => {
         params,
         {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJ0b2tlbklkIjoiMTcxZTk2MTEtNzkwYy00ZjU4LWI5ZmUtMmM2ODAyZDljYjg1IiwiaWF0IjoxNjk1NzkyNjQ2fQ.Xo9EZCWwa7S4iN-O5MupiKmQpMXtuH1JXGZ5kMf6fSE`,
+            Authorization: `Bearer ${accessToken}`,
           },
         },
       );

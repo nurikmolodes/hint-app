@@ -106,7 +106,7 @@ function App() {
     },
     {
       path: "/you/:name",
-      component: <YouDetail />,
+      component: <YouDetail user={user} />,
       label: "You Detail",
     },
   ];
