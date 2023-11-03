@@ -59,14 +59,11 @@ const Romantic = ({ match, user, partnerInfo }) => {
     return (
       <Document>
         <Page size="A4" style={styles.page}>
-          <Text style={styles.title}>
-            Friendship Report: <br /> {user?.info?.name} + {partnerInfo?.partnerInfo?.name}
-          </Text>
+          Romantic Report: <br /> {user?.info?.name} + {partnerInfo?.partnerInfo?.name}
           <Text style={styles.title}>Compatibility Percentage:</Text>
           <Text style={styles.paragraph}>{`${match?.compatibility_percentage}%`}</Text>
           <Text style={styles.title}>Compatibility Report:</Text>
           <Text style={styles.paragraph}>{match.compatibility_report}</Text>
-
           {match.friendship_report.map((paragraph, index) => (
             <View key={index} style={styles.section}>
               <Text style={styles.paragraph}>{`${index + 1}. ${paragraph}`}</Text>

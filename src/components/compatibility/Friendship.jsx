@@ -12,7 +12,7 @@ import Share from "./share/Share";
 import axios from "axios";
 import html2canvas from "html2canvas";
 
-const Friendship = ({ match, user }) => {
+const Friendship = ({ match, user, partnerInfo }) => {
   const characteristics = [
     {
       id: "basic-friend",
@@ -57,13 +57,11 @@ const Friendship = ({ match, user }) => {
     return (
       <Document>
         <Page size="A4" style={styles.page}>
-          <Text>{user?.info?.name}</Text>
-          <Text style={styles.title}>Friendship Report:</Text>
+          Friendship Report: <br /> {user?.info?.name} + {partnerInfo?.partnerInfo?.name}
           <Text style={styles.title}>Compatibility Percentage:</Text>
           <Text style={styles.paragraph}>{`${match?.compatibility_percentage}%`}</Text>
           <Text style={styles.title}>Compatibility Report:</Text>
           <Text style={styles.paragraph}>{match.compatibility_report}</Text>
-
           {match.friendship_report.map((paragraph, index) => (
             <View key={index} style={styles.section}>
               <Text style={styles.paragraph}>{`${index + 1}. ${paragraph}`}</Text>
