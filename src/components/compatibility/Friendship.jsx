@@ -57,6 +57,7 @@ const Friendship = ({ match, user }) => {
     return (
       <Document>
         <Page size="A4" style={styles.page}>
+          <Text>{user?.info?.name}</Text>
           <Text style={styles.title}>Friendship Report:</Text>
           <Text style={styles.title}>Compatibility Percentage:</Text>
           <Text style={styles.paragraph}>{`${match?.compatibility_percentage}%`}</Text>

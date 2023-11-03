@@ -38,6 +38,11 @@ const ResultsCompatibility = ({ match, user }) => {
     }));
     setOptions(updatedOptions);
   };
+  const [partnerInfo, setPartnerInfo] = useState({});
+  useEffect(() => {
+    const partnerInfo = JSON.parse(localStorage.getItem("myPartner"));
+    setPartnerInfo(partnerInfo);
+  }, []);
 
   return (
     <div className="resultsCompatibility">
@@ -60,9 +65,9 @@ const ResultsCompatibility = ({ match, user }) => {
         ))}
       </div>
       {option === "Romantic" ? (
-        <Romantic user={user} match={match} />
+        <Romantic user={user} match={match} partnerInfo={partnerInfo} />
       ) : (
-        <Friendship user={user} match={match} />
+        <Friendship user={user} match={match} partnerInfo={partnerInfo} />
       )}
     </div>
   );

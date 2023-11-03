@@ -12,7 +12,7 @@ import Share from "./share/Share";
 import axios from "axios";
 import html2canvas from "html2canvas";
 
-const Romantic = ({ match, user }) => {
+const Romantic = ({ match, user, partnerInfo }) => {
   const characteristics = [
     {
       id: "basic-romantic",
@@ -59,7 +59,9 @@ const Romantic = ({ match, user }) => {
     return (
       <Document>
         <Page size="A4" style={styles.page}>
-          <Text style={styles.title}>Friendship Report:</Text>
+          <Text style={styles.title}>
+            Friendship Report: <br /> {user?.info?.name} + {partnerInfo?.partnerInfo?.name}
+          </Text>
           <Text style={styles.title}>Compatibility Percentage:</Text>
           <Text style={styles.paragraph}>{`${match?.compatibility_percentage}%`}</Text>
           <Text style={styles.title}>Compatibility Report:</Text>

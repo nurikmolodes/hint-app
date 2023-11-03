@@ -26,6 +26,7 @@ const getDatePickerValues = () => {
   };
 
   options.years = [
+    "00",
     "01",
     "02",
     "03",

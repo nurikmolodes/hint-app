@@ -68,7 +68,7 @@ const SignIn = () => {
             ? "Loading"
             : loading === "error"
             ? "Error"
-            : ""}
+            : "Loading"}
         </button>
         <span>{loading === "error" && "An Error occurred while trying sign in"}</span>
       </form>
