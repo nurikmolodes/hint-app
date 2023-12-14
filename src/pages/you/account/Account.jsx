@@ -33,22 +33,24 @@ const Account = ({ user }) => {
 
   const data2 = [
     {
-      title: "Desk Help",
+      title: "Contact Support.",
       content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, accusamus quasi! Quasi, asperiores doloremque consequatur natus laboriosam consectetur ratione unde veritatis non, libero suscipit. Eum repellendus exercitationem fuga cum sint!",
+        "If you have any questions feel free to contact our support department: info@astropulse.app",
       line: true,
     },
     {
       title: "Privacy policy",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, ipsam cum? Aspernatur harum consectetur nam fuga natus rem. Deleniti, aperiam et excepturi soluta cupiditate ab exercitationem necessitatibus itaque nesciunt officia.",
+      // content:
+      //   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, ipsam cum? Aspernatur harum consectetur nam fuga natus rem. Deleniti, aperiam et excepturi soluta cupiditate ab exercitationem necessitatibus itaque nesciunt officia.",
       line: true,
+      link: "https://appmediaco.com/Policy.html",
     },
     {
       title: "EULA",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, ipsam cum? Aspernatur harum consectetur nam fuga natus rem. Deleniti, aperiam et excepturi soluta cupiditate ab exercitationem necessitatibus itaque nesciunt officia.",
+      // content:
+      //   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, ipsam cum? Aspernatur harum consectetur nam fuga natus rem. Deleniti, aperiam et excepturi soluta cupiditate ab exercitationem necessitatibus itaque nesciunt officia.",
       line: false,
+      link: "https://appmediaco.com/Policy.html",
     },
   ];
   const [activeIndex2, setActiveIndex2] = useState(null);
@@ -101,13 +103,13 @@ const Account = ({ user }) => {
           {data2.map((item, index) => (
             <div
               key={index}
-              className={`accordion-item ${index === activeIndex2 ? "active" : ""}`}
+              className={`accordion-item ${0 === activeIndex2 ? "active" : ""}`}
               onClick={() => handleClick2(index)}>
-              <div className="accordion-title">
+              <a className="accordion-title" href={item.link} target="_blank">
                 <span>{item.title}</span>
                 <img src={openBlock} />
-              </div>
-              {index === activeIndex2 && <div className="accordion-content">{item.content}</div>}
+              </a>
+              {0 === activeIndex2 && <div className="accordion-content">{item.content}</div>}
               {item.line ? <div className="line"></div> : null}
             </div>
           ))}

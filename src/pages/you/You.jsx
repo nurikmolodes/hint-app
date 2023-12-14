@@ -50,7 +50,7 @@ const You = ({ setResultsPalm, user }) => {
               <img src={userAccount} />
             </Link>
           </section>
-          <p>Born on December 22, 1994 at 12:00 PM.</p>
+          <p>Born on {user?.info?.birth_date}</p>
         </nav>
         <nav>
           <span>Your core personality</span>
