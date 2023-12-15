@@ -50,7 +50,7 @@ const Account = ({ user }) => {
       // content:
       //   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, ipsam cum? Aspernatur harum consectetur nam fuga natus rem. Deleniti, aperiam et excepturi soluta cupiditate ab exercitationem necessitatibus itaque nesciunt officia.",
       line: false,
-      link: "https://appmediaco.com/Policy.html",
+      link: "https://appmediaco.com/Terms.html",
     },
   ];
   const [activeIndex2, setActiveIndex2] = useState(null);
@@ -103,7 +103,7 @@ const Account = ({ user }) => {
           {data2.map((item, index) => (
             <div
               key={index}
-              className={`accordion-item ${0 === activeIndex2 ? "active" : ""}`}
+              className={`accordion-item ${index === activeIndex2 ? "active" : ""}`}
               onClick={() => handleClick2(index)}>
               <a className="accordion-title" href={item.link} target="_blank">
                 <span>{item.title}</span>
